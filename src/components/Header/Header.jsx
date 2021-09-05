@@ -1,12 +1,6 @@
 import style from './Header.module.scss';
 
-interface IHeaderProps {
-    logo: string;
-    heading: string;
-    login: string;
-}
-
-const Header = (props: IHeaderProps) => {
+const Header = (props) => {
     return (
         <header className={style.header}>
             <div className={style.logo}>{props.logo}</div>

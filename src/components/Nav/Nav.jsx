@@ -1,10 +1,6 @@
-import style from './Menu.module.scss';
+import style from './Nav.module.scss';
 
-interface IMenuProps {
-    list: Array<string>;
-}
-
-const Menu = (props: IMenuProps) => {
+const Nav = (props) => {
     return (
         <nav className={style.nav}>
             <ul className={style.navList}>
@@ -15,4 +11,4 @@ const Menu = (props: IMenuProps) => {
     );
 };
 
-export default Menu;
+export default Nav;

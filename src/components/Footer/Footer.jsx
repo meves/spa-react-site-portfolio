@@ -1,13 +1,9 @@
 import style from './Footer.module.scss';
 
-interface IFooter {
-    message: string;
-}
-
-const Footer = (props: IFooter) => {
+const Footer = (props) => {
     return (
         <footer className={style.footer}>
-            {props.message}
+            Footer
         </footer>
     );
 };
