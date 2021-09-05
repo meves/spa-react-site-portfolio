@@ -1,0 +1,46 @@
+/* autoprefixer grid: autoplace */
+
+.header {
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    background-color: var(--bg-color);
+
+    .logo { 
+        display: inline-block;
+        width: 2em;
+        height: 1.5em;
+        font-family: 'Lobster', cursive;
+        font-size: 2rem;
+        text-transform: uppercase;
+        color: var(--light-color);
+        background-color: var(--dark-color);
+        text-align: center;
+        line-height: 1.5; 
+        border-radius: 50%;
+        margin-left: 0.5em;
+    }
+
+    .heading {
+        margin: 0.5em 0 0.5em 1em;
+        color: var(--dark-color);
+    }
+
+    .login {
+        font-family: 'Lobster';
+        font-size: 1rem;
+        letter-spacing: 0.15em;
+        text-transform: capitalize;
+        margin-left: 2em;
+        outline: none;
+        border: none;
+        padding: 0.5em 0.75em;
+        background-color: var(--dark-color);
+        color: var(--light-color);
+        border-radius: 100%;
+        line-height: 1;
+        cursor: pointer;
+    }
+}
+

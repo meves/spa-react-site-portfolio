@@ -1,0 +1,36 @@
+/* autoprefixer grid: autoplace */
+.nav {
+    grid-area: menu;
+
+    background-color: var(--bg-color);
+
+    .navList {
+        list-style-type: none;
+        background-color: var(--dark-color);
+        padding-top: 1em;
+        padding-bottom: 1em;
+        padding-left: 0;
+     
+        .navItem {
+            padding: 0.5em 1em;
+
+            &:not(:first-child) {
+                margin-top: 1em;
+            }
+
+            .navLink {
+                display: block;
+                text-decoration: none;
+                text-transform: uppercase;
+                color: var(--light-color);
+            }
+        }
+        .navItem:hover {
+            background-color: var(--super-light-color);
+
+            .navLink {
+                color: var(--dark-color);
+            }
+        }
+    }
+}
