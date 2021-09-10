@@ -4,8 +4,8 @@
     grid-area: header;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    background-color: var(--bg-color);
+    justify-content: space-around;
+    background-color: var(--super-light-color);
 
     .logo { 
         display: inline-block;

@@ -3,7 +3,7 @@ import style from './Contacts.module.scss';
 const Contacts = (props) => {
     return (
         <section className={style.sectionContacts}>
-            Contacts
+            {props.data.message}
         </section>
     );
 };

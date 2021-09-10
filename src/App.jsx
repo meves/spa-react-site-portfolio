@@ -7,18 +7,21 @@ import Forum from './components/Forum/Forum';
 import Shop from './components/Shop/Shop';
 import Contacts from './components/Contacts/Contacts';
 import Footer from './components/Footer/Footer';
+import { Route } from 'react-router-dom';
 
 const App = (props) => {
   return (
     <div className="App">
-      <Header logo="см" heading="Персональный сайт Сергея Медведкина" login="Login" />
-      <Nav list={['main', 'blog', 'forum', 'shop', 'contacts']}/>
-      <Main message="This is a Preview"/>
-      <Blog message="This is an About me"/>
-      <Forum message="This is My Skills"/>
-      <Shop message="This is My Works"/>
-      <Contacts message="These are Contacts"/>
-      <Footer message="This is a Footer"/>
+      <Header header={props.state.header} />
+      <Nav titles={props.state.nav.titles}/>
+        <Route path="/main" render={ () => <Main data={props.state.main}/> } />
+        <Route path="/blog" render={ () => 
+          <Blog data={props.state.blog} dispatch={props.dispatch} /> } 
+        />
+        <Route path="/forum" render={ () => <Forum data={props.state.forum}/> } />
+        <Route path='/shop' render={ () => <Shop data={props.state.shop}/> } />
+        <Route path="/contacts" render={ () => <Contacts data={props.state.contacts}/> } />
+      <Footer footer={props.state.footer} />
     </div>    
   );
 }
