@@ -1,9 +1,10 @@
+import React from 'react';
 import style from './Forum.module.scss';
 
 const Forum = (props) => {
     return (
         <section className={style.sectionForum}>
-            {props.data.message}
+            {props.message}
         </section>
     );
 };

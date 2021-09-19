@@ -1,3 +1,5 @@
+import React from "react";
+
 const Works = (props) => {
     return (
         <section className="sectionWorks">

@@ -1,4 +1,4 @@
-import { addNewPostReducer } from './blog-reducer';
+import { blogReducer } from './blog-reducer';
 
 const store = {
     
@@ -62,8 +62,7 @@ const store = {
                     {id: 1, avatar: '/img/avatar.jpg', theme: 'Mountains', text: 'Text about mountains', date: '01.09.2021'},
                     {id: 2, avatar: '/img/avatar.jpg', theme: 'Rivers', text: 'Text about rivers', date: '02.09.2021'}
                 ]
-            },
-            
+            },            
         },
         forum: {
             message: 'Forum'
@@ -84,7 +83,7 @@ const store = {
     getState() { return this._state; },
 
     dispatch(action) {
-        this._state.blog = addNewPostReducer(this._state.blog, action);
+        this._state.blog = blogReducer(this._state.blog, action);
         this._callSubscriber(this._state);
     }
 };

@@ -1,66 +1,59 @@
 import React from "react";
-import { clearThemeActionCreator, clearTextActionCreator,
-         fillThemeActionCreator, fillTextActionCreator,
-         addSymbolToThemeActionCreator, addSymbolToTextActionCreator,
-         addNewPostActionCreator} from "../../../redux/blog-reducer";
-
+         
 const AddPost = (props) => {
-    const textAreaTextRef = React.createRef();
-    const textAreaThemeRef = React.createRef();
-    
     const handleFocus = (event) => {
         if (event.target.name === 'theme') {
-            props.dispatch(clearThemeActionCreator());
+            props.clearTheme();
         }
         if (event.target.name === 'text') {
-            props.dispatch(clearTextActionCreator());
+            props.clearText();
         }            
     };
-
+    
     const handleBlur = (event) => {
         if (event.target.name === 'theme') {
-            props.dispatch(fillThemeActionCreator());
+            props.fillTheme();
         }
         if (event.target.name === 'text') {
-            props.dispatch(fillTextActionCreator());
+            props.fillText();
         }
-    };
-
+    };             
+             
     const handleChange = (event) => {
         let text = event.target.value;
         if (event.target.name === 'theme') {
-            props.dispatch(addSymbolToThemeActionCreator(text));
+            props.addSymbolToTheme(text);
         }
         if (event.target.name === 'text') {
-            props.dispatch(addSymbolToTextActionCreator(text));
+            props.addSymbolToText(text);
         }
     };
 
     const handleClickButton = () => {
-        props.dispatch(addNewPostActionCreator());
+        props.addNewPost();
     };        
 
     return (
         <section className="addPost">
-            <h3>{props.addPost.title}</h3>
+            <h3>{props.title}</h3>
             
-            <div><textarea ref={textAreaThemeRef}cols="30" rows="1" 
-                           placeholder={props.addPost.placeholderTheme}
+            <div><textarea cols="30" rows="1" 
+                           placeholder={props.placeholderTheme}
                            name="theme"
                            onFocus={handleFocus}
                            onBlur={handleBlur}
                            onChange={handleChange}
-                           value={props.addPost.symbolsTheme}/></div>
+                           value={props.symbolsTheme}/></div>
                              
-            <div><textarea ref={textAreaTextRef} cols="30" rows="3" 
-                           placeholder={props.addPost.placeholderText}
+            <div><textarea cols="30" rows="3" 
+                           placeholder={props.placeholderText}
                            name="text"
                            onFocus={handleFocus}
                            onBlur={handleBlur}
                            onChange={handleChange}
-                           value={props.addPost.symbolsText}/></div>
+                           value={props.symbolsText}/></div>
             
-            <div><button onClick={handleClickButton}>{props.addPost.button}</button></div>
+            <div><button onClick={handleClickButton}>{props.button}</button></div>
         </section>
     );
 };

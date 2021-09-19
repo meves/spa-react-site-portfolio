@@ -1,12 +1,13 @@
+import React from 'react';
 import style from './Footer.module.scss';
 
 const Footer = (props) => {
     return (
         <footer className={style.footer}>
-            <span>Author: {props.footer.author}</span>
-            <span>Data: {props.footer.data}</span>
-            <span>email: {props.footer.email}</span>
-            <span>tel: {props.footer.tel}</span>
+            <span>Author: {props.author}</span>
+            <span>Data: {props.data}</span>
+            <span>email: {props.email}</span>
+            <span>tel: {props.tel}</span>
         </footer>
     );
 };

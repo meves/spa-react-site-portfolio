@@ -1,3 +1,5 @@
+import React from "react";
+
 const Skills = (props) => {
     const listItems = props.data.items.map(entry => <li key={entry.id}>{entry.item}</li>);        
     return (

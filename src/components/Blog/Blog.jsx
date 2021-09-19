@@ -1,15 +1,14 @@
+import React from 'react';
 import style from './Blog.module.scss';
-import AddPost from './AddPost/AddPost';
-import Posts from './Posts/Posts';
+import AddPostContainer from './AddPost/AddPostContainer';
+import PostsContainer from './Posts/PostsContainer';
 
 const Blog = (props) => {
     return (
         <section className={style.sectionBlog}>
-            {props.data.message}
-            <AddPost addPost={props.data.addPost} 
-                     dispatch={props.dispatch}
-            />
-            <Posts myPost={props.data.myPost}/>
+            {props.message}
+            <AddPostContainer/>
+            <PostsContainer/>
         </section>
     );
 };
