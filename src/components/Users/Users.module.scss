@@ -1,15 +1,17 @@
 .users {
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-bottom: 2em;
+    padding: 2em 1em;
     background-color: var(--super-light-color);
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    & > h2 {
+        margin-top: 0;
+    }
 }
 
 .userItem {
-    padding: 0.5em;
+    padding-top: 0.5em;
     width: 100%;
     display: flex;
     margin-top: 1em;
@@ -73,4 +75,30 @@
 .button > button:hover {
     background-color: var(--dark-color);
     color: var(--light-color);
+}
+
+.paginationWrapper {
+    display: flex;
+    justify-content: flex-start;
+    width: 25em;
+    overflow-x: scroll;
+}
+
+.paginationNumber {
+    flex: 1;
+    margin-right: 0.5em;
+}
+.paginationNumber:hover {
+    cursor: pointer;
+    color: var(--bg-color);
+}
+
+.currentNumber {
+    font-weight: bold;
+    text-decoration: underline;
+    color: red;
+}
+
+.itemsWrapper {
+    position: relative
 }

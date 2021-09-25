@@ -5,12 +5,13 @@ export const CLEAR_TEXT = 'CLEAR_TEXT';
 export const FILL_TEXT = 'FILL_TEXT';
 export const ADD_SYMBOL_TO_THEME = 'ADD_SYMBOL_TO_THEME';
 export const ADD_SYMBOL_TO_TEXT = 'ADD_SYMBOL_TO_TEXT';
+export const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 const PLACEHOLDER_THEME = 'Theme';
 const PLACEHOLDER_TEXT = 'add text here...';
 
 const initialState = {
-    message: 'Blog',
+    message: 'Profile Page',
     addPost: {
         title: 'Add new post',
         button: 'Add post',
@@ -26,7 +27,7 @@ const initialState = {
             {id: 2, avatar: '/img/avatar.jpg', theme: 'Rivers', text: 'Text about rivers', date: '02.09.2021'}
         ]
     },
-    
+    profile: null
 };
 
 export const blogReducer = (state=initialState, action) => {
@@ -100,39 +101,51 @@ export const blogReducer = (state=initialState, action) => {
                             }]        
                 },
             } 
+        case SET_USER_PROFILE: 
+            return {
+                ...state,
+                profile: action.profile
+            };
         default:
             return state;
     }
 }
 
-export const addSymbolToThemeAC = (text) => ({ 
+export const addSymbolToTheme = (text) => ({ 
     type: ADD_SYMBOL_TO_THEME, 
     text: text 
 });
 
-export const addSymbolToTextAC = (text) => ({
+export const addSymbolToText = (text) => ({
     type: ADD_SYMBOL_TO_TEXT, 
     text: text
 });
 
-export const clearThemeAC = () => ({
+export const clearTheme = () => ({
     type: CLEAR_THEME
 });
 
-export const clearTextAC = () => ({
+export const clearText = () => ({
     type: CLEAR_TEXT
 });
 
-export const fillThemeAC = () => ({
+export const fillTheme = () => ({
     type: FILL_THEME
 });
 
-export const fillTextAC = () => ({
+export const fillText = () => ({
     type: FILL_TEXT
 });
 
-export const addNewPostAC = () => ({
+export const addNewPost = () => ({
     type: ADD_NEW_POST
 });
+
+export const setUserProfile = (profile) => {
+    return {
+        type: SET_USER_PROFILE,
+        profile
+    };
+}
 
 export default blogReducer;

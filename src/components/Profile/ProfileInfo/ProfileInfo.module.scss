@@ -1,0 +1,18 @@
+.profileInfo {
+    padding: 0;
+}
+
+.contacts {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.contacts > a {
+    flex: 1;
+    display: block;
+    text-decoration: none;
+    color: var(--light-color);
+    padding: 0.5em;
+    margin-right: 0.1em;
+    background-color: var(--dark-color);
+}

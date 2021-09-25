@@ -10,12 +10,6 @@ const mapStateToProps = (state) => {
     };
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-
-    };
-}
-
-const FooterContainer = connect(mapStateToProps, mapDispatchToProps)(Footer);
+const FooterContainer = connect(mapStateToProps, {})(Footer);
 
 export default FooterContainer;

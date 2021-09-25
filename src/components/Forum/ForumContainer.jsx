@@ -7,12 +7,6 @@ const mapStateToProps = (state) => {
     };
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-
-    };
-}
-
-const ForumContainer = connect(mapStateToProps, mapDispatchToProps)(Forum);
+const ForumContainer = connect(mapStateToProps, {})(Forum);
 
 export default ForumContainer;

@@ -7,12 +7,6 @@ const mapStateToProps = (state) => {
     };
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-
-    };
-}
-
-const ShopContainer = connect(mapStateToProps, mapDispatchToProps)(Shop);
+const ShopContainer = connect(mapStateToProps, {})(Shop);
 
 export default ShopContainer;

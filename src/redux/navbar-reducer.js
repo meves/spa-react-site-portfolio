@@ -1,11 +1,11 @@
 const initialState = {
     titles: [
         {id: 1, title: 'main'},
-        {id: 2, title: 'blog'},
-        {id: 3, title: 'forum'},
-        {id: 4, title: 'shop'},
-        {id: 5, title: 'contacts'},
-        {id: 6, title: 'users'}
+        {id: 2, title: 'forum'},
+        {id: 3, title: 'users'},
+        {id: 4, title: 'profile'},
+        {id: 5, title: 'shop'},
+        {id: 6, title: 'contacts'}
     ]
 };
 
