@@ -8,6 +8,7 @@ import shopReducer from './shop-reducer';
 import contactsReducer from './contacts-reducer';
 import footerReducer from './footer-reducer';
 import usersReducer from './users-reducer';
+import authReducer from './auth-reducer';
 
 const reducers = combineReducers({
     headerPage: headerReducer,
@@ -18,7 +19,8 @@ const reducers = combineReducers({
     shopPage: shopReducer,
     contactsPage: contactsReducer,
     footerPage: footerReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    auth: authReducer
 });
 const store = createStore(reducers);
 

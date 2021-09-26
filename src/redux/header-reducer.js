@@ -1,7 +1,7 @@
 const initialState = {
     logo: 'см',
     heading: 'Web Developer Sergey Medvedkin',
-    login: 'Sign in/up'
+    loginText: 'Login'
 };
 
 const headerReducer = (state=initialState, action) => {

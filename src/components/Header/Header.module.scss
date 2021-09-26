@@ -27,7 +27,7 @@
         color: var(--dark-color);
     }
 
-    .login {
+    .loginButton {
         font-family: 'Lobster';
         font-size: 1rem;
         letter-spacing: 0.15em;
@@ -41,6 +41,12 @@
         border-radius: 100%;
         line-height: 1;
         cursor: pointer;
+
+        & > a {
+            color: var(--light-color);
+            text-decoration: none;
+            text-transform: lowercase;
+        }
     }
 }
 

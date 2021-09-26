@@ -6,6 +6,7 @@ const GET_TOTAL_COUNT = 'GET_TOTAL_COUNT';
 const RESET_USERS = 'RESET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_IS_FETCHING = 'SET_IS_FETCHING';
+const FOLLOWING_PROGRESS = 'FOLLOWING_PROGRESS';
 export const URL = '/img/avatar_2.png';
 
 const initialState = {
@@ -13,7 +14,8 @@ const initialState = {
     currentPage: 1,
     count: 4,
     totalCount: 0,
-    isFetching: true
+    isFetching: true,
+    followingProgress: []
 };
 
 const usersReducer = (state=initialState, action) => {
@@ -69,6 +71,13 @@ const usersReducer = (state=initialState, action) => {
                 ...state,
                 isFetching: action.isFetching
             };    
+        case FOLLOWING_PROGRESS:
+            return {
+                ...state,
+                followingProgress: action.isFetching  
+                                ? [...state.followingProgress, action.userId]
+                                : state.followingProgress.filter(id => id !== action.userId)
+            };
         default: 
             return state;
     }
@@ -121,6 +130,14 @@ export const setIsFetching = (isFetching) => {
     return {
         type: SET_IS_FETCHING,
         isFetching
+    };
+}
+
+export const toggleFollowingProgress = (isFetching, userId) => {
+    return {
+        type: FOLLOWING_PROGRESS,
+        isFetching,
+        userId
     };
 }
 
