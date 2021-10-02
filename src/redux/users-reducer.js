@@ -1,3 +1,4 @@
+import { usersAPI } from "../api/api";
 // constants
 const FOLLOW_USER = 'FOLLOW_USER';
 const UNFOLLOW_USER = 'NFOLLOW_USER';
@@ -139,6 +140,55 @@ export const toggleFollowingProgress = (isFetching, userId) => {
         isFetching,
         userId
     };
+}
+
+// thunk creators
+export const getUsers = (currentPage, count) => {
+    return (dispatch) => {
+        dispatch(setIsFetching(true));
+        /**this request sended once after component was mounted */
+        usersAPI.getUsers(currentPage, count).then(data => {
+            dispatch(setIsFetching(false));
+            dispatch(loadUsers(data.items));
+            dispatch(getTotalCount(data.totalCount));
+        });
+    }
+}
+
+export const getCurrentPageUsers = (currentPage, count) => {
+    return (dispatch) => {
+        dispatch(setCurrentPage(currentPage));
+        dispatch(setIsFetching(true));
+        /**this request sended when user cnanges current page */
+        usersAPI.getUsers(currentPage, count).then(data => {
+            dispatch(resetUsers(data.items));
+            dispatch(setIsFetching(false));
+        });
+    }
+}
+
+export const follow = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFollowingProgress(true, userId));
+        usersAPI.followUser(userId).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(followUser(userId));
+                dispatch(toggleFollowingProgress(false, userId));
+            }
+        }) 
+    }
+}
+
+export const unfollow = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFollowingProgress(true, userId));
+        usersAPI.unfollowUser(userId).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(unfollowUser(userId));
+                dispatch(toggleFollowingProgress(false, userId));
+            }
+        })
+    }
 }
 
 export default usersReducer;

@@ -1,8 +1,6 @@
 import AddPost from "./AddPost";
 import { connect } from 'react-redux';
-import { clearTheme, clearText, 
-         fillTheme, fillText,
-         addSymbolToTheme, addSymbolToText,
+import { handleFocus, handleBlur, handleChange,
          addNewPost } from "../../../redux/profile-reducer";
 
 const mapStateToProps = (state) => {
@@ -16,8 +14,6 @@ const mapStateToProps = (state) => {
     };
 }
 
-const AddPostContainer = connect(mapStateToProps, {
-    clearTheme, clearText, fillTheme, fillText, addSymbolToTheme, addSymbolToText, addNewPost
+export default connect(mapStateToProps, {
+    handleFocus, handleBlur, handleChange, addNewPost
 })(AddPost);
-
-export default AddPostContainer;

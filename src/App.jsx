@@ -8,6 +8,7 @@ import ShopContainer from './components/Shop/ShopContainer';
 import ContactsContainer from './components/Contacts/ContactsContainer';
 import FooterContainer from './components/Footer/FooterContainer';
 import UsersContainer from './components/Users/UsersContainer';
+import LoginPage from './components/Login/Login';
 import { Route } from 'react-router-dom';
 
 const App = (props) => {
@@ -21,6 +22,7 @@ const App = (props) => {
         <Route path="/users" render={() => <UsersContainer/>} />
         <Route path='/shop' render={() => <ShopContainer/>} />
         <Route path="/contacts" render={() => <ContactsContainer/>} />
+        <Route path="/login/" render={() => <LoginPage/> } />
       <FooterContainer/> 
     </div>    
   );

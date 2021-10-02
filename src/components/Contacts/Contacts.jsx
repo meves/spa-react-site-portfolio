@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Contacts.module.scss';
 
-const Contacts = (props) => {
+const Contacts = (props) => {    
     return (
         <section className={style.sectionContacts}>
             {props.message}

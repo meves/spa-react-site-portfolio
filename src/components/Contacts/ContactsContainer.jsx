@@ -1,12 +1,24 @@
+import React from 'react';
+import { Redirect } from 'react-router-dom';
 import Contacts from "./Contacts";
 import { connect } from 'react-redux';
 
+class ContactsContainer extends React.Component {
+    render() {
+        if (!this.props.isAuth) {
+            return (<Redirect to="/login"/>);
+        }
+        return (
+            <Contacts {...this.props} />
+        );
+    }
+}
+
 const mapStateToProps = (state) => {
     return {
-        message: state.contactsPage.message
+        message: state.contactsPage.message,
+        isAuth: state.auth.isAuth
     };
 }
 
-const ContactsContainer = connect(mapStateToProps, {})(Contacts);
-
-export default ContactsContainer;
+export default connect(mapStateToProps, {})(ContactsContainer);

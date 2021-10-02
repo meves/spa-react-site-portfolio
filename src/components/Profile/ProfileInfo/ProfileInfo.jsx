@@ -8,6 +8,12 @@ const ProfileInfo = (props) => {
             <Preloader />
         );
     }
+    const links = [];
+    for (let [key, value] of Object.entries(props.profile.contacts)) {
+        if (value !== null) {
+            links.push(<a href={value}>{key}</a>);
+        }
+    }    
     return (
         <div className={style.profileInfo}>            
             <img src={props.profile.photos.small || props.profile.photos.large || props.profile.fullName} 
@@ -15,15 +21,8 @@ const ProfileInfo = (props) => {
             <p>{props.profile.aboutMe}</p>
             {props.profile.lookingForAJob ? <p>{props.profile.lookingForAJobDescription}</p> : null}
             <div className={style.contacts}>
-                    <a href={`https://www.${props.profile.contacts.facebook}`}>Facebook</a>
-                    <a href={`https://www.${props.profile.contacts.website}`}>Website</a>
-                    <a href={`https://www.${props.profile.contacts.vk}`}>VK</a>
-                    <a href={`https://www.${props.profile.contacts.twitter}`}>Twitter</a>
-                    <a href={`https://www.${props.profile.contacts.instagram}`}>Instagram</a>
-                    <a href={`https://www.${props.profile.contacts.youtube}`}>Youtube</a>
-                    <a href={`https://www.${props.profile.contacts.github}`}>Github</a>
-                    <a href={`https://www.${props.profile.contacts.mainLink}`}>MainLink</a>
-                </div>
+                { links }
+            </div>
         </div>
     );
 }

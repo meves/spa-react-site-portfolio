@@ -3,7 +3,6 @@ import style from './Users.module.scss';
 import { URL } from '../../redux/users-reducer';
 import Preloader from '../common/Preloader/Preloader';
 import { NavLink } from 'react-router-dom';
-import { usersAPI } from '../../api/api';
 
 const Users = (props) => {
     /**generate UserItems */
@@ -17,25 +16,13 @@ const Users = (props) => {
                 </NavLink>
                 {user.followed ? 
                     <p><button disabled={props.followingProgress.some(id => id === user.id)}
-                        onClick={() => {
-                        props.toggleFollowingProgress(true, user.id);
-                        usersAPI.unfollowUser(user.id).then(data => {
-                            if (data.resultCode === 0) {
-                                props.unfollowUser(user.id);
-                                props.toggleFollowingProgress(false, user.id);
-                            }
-                        })
-                    }}>{'Unfollow'}</button></p> :
+                               onClick={ () => { props.unfollow(user.id) } }>
+                               {'Unfollow'}
+                    </button></p> :
                     <p><button disabled={props.followingProgress.some(id => id === user.id)} 
-                        onClick={() => {
-                        props.toggleFollowingProgress(true, user.id);
-                        usersAPI.followUser(user.id).then(data => {
-                            if (data.resultCode === 0) {
-                                props.followUser(user.id);
-                                props.toggleFollowingProgress(false, user.id);
-                            }
-                        })    
-                    }}>{'Follow'}</button></p> }
+                               onClick={ () => { props.follow(user.id); } }>
+                               {'Follow'}
+                    </button></p> }
             </div> 
             <div className={style.userInfo}>
                 <div className={style.fullInfo}>

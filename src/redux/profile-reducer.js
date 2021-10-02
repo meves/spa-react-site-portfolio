@@ -1,3 +1,5 @@
+import { usersAPI } from "../api/api";
+
 export const ADD_NEW_POST = 'ADD_NEW_POST';
 export const CLEAR_THEME = 'CLEAR_THEME';
 export const FILL_THEME = 'FILL_THEME';
@@ -146,6 +148,47 @@ export const setUserProfile = (profile) => {
         type: SET_USER_PROFILE,
         profile
     };
+}
+
+// thunk creators
+export const getUserProfile = (userId) => {
+    return (dispatch) => {
+        usersAPI.getUserProfile(userId).then(data => 
+            dispatch(setUserProfile(data)));
+    }
+}
+
+export const handleFocus = (name) => {
+    return (dispatch) => {
+        if (name === 'theme') {
+            dispatch(clearTheme());
+        }
+        if (name === 'text') {
+            dispatch(clearText());
+        }
+    }
+}
+
+export const handleBlur = (name) => {
+    return (dispatch) => {
+        if (name === 'theme') {
+            dispatch(fillTheme());
+        }
+        if (name === 'text') {
+            dispatch(fillText());
+        }
+    }
+} 
+
+export const handleChange = (name, text) => {
+    return (dispatch) => {
+        if (name === 'theme') {
+            dispatch(addSymbolToTheme(text));
+        }
+        if (name === 'text') {
+            dispatch(addSymbolToText(text));
+        }
+    }
 }
 
 export default blogReducer;

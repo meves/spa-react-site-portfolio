@@ -8,10 +8,7 @@ const ax = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/'
 });
 
-export const usersAPI = {
-    authMe() {
-        return ax.get(`auth/me`).then(response => response.data);
-    },
+export const usersAPI = {    
     getUserProfile(userId) {
         return ax.get(`profile/${userId}`).then(response => response.data);
     },
@@ -23,5 +20,11 @@ export const usersAPI = {
     },
     getUsers(page, count) {
         return ax.get(`users?page=${page}&count=${count}`).then(response => response.data);
+    }
+};
+
+export const authAPI = {
+    authMe() {
+        return ax.get(`auth/me`).then(response => response.data);
     }
 };

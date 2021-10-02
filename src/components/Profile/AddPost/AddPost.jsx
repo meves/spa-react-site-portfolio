@@ -1,35 +1,19 @@
 import React from "react";
          
 const AddPost = (props) => {
-    const handleFocus = (event) => {
-        if (event.target.name === 'theme') {
-            props.clearTheme();
-        }
-        if (event.target.name === 'text') {
-            props.clearText();
-        }            
+    const onHandleFocus = (event) => {
+        props.handleFocus(event.target.name);
     };
     
-    const handleBlur = (event) => {
-        if (event.target.name === 'theme') {
-            props.fillTheme();
-        }
-        if (event.target.name === 'text') {
-            props.fillText();
-        }
+    const onHandleBlur = (event) => {
+        props.handleBlur(event.target.name);
     };             
              
-    const handleChange = (event) => {
-        let text = event.target.value;
-        if (event.target.name === 'theme') {
-            props.addSymbolToTheme(text);
-        }
-        if (event.target.name === 'text') {
-            props.addSymbolToText(text);
-        }
+    const onHandleChange = (event) => {
+        props.handleChange(event.target.name, event.target.value);
     };
 
-    const handleClickButton = () => {
+    const onHandleClickButton = () => {
         props.addNewPost();
     };        
 
@@ -40,20 +24,20 @@ const AddPost = (props) => {
             <div><textarea cols="30" rows="1" 
                            placeholder={props.placeholderTheme}
                            name="theme"
-                           onFocus={handleFocus}
-                           onBlur={handleBlur}
-                           onChange={handleChange}
+                           onFocus={onHandleFocus}
+                           onBlur={onHandleBlur}
+                           onChange={onHandleChange}
                            value={props.symbolsTheme}/></div>
                              
             <div><textarea cols="30" rows="3" 
                            placeholder={props.placeholderText}
                            name="text"
-                           onFocus={handleFocus}
-                           onBlur={handleBlur}
-                           onChange={handleChange}
+                           onFocus={onHandleFocus}
+                           onBlur={onHandleBlur}
+                           onChange={onHandleChange}
                            value={props.symbolsText}/></div>
             
-            <div><button onClick={handleClickButton}>{props.button}</button></div>
+            <div><button onClick={onHandleClickButton}>{props.button}</button></div>
         </section>
     );
 };
