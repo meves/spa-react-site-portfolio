@@ -22,7 +22,7 @@ const App = (props) => {
         <Route path="/users" render={() => <UsersContainer/>} />
         <Route path='/shop' render={() => <ShopContainer/>} />
         <Route path="/contacts" render={() => <ContactsContainer/>} />
-        <Route path="/login/" render={() => <LoginPage/> } />
+        <Route path="/login" render={() => <LoginPage/> } />
       <FooterContainer/> 
     </div>    
   );

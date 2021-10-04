@@ -9,7 +9,7 @@ const Header = (props) => {
             <h1 className={style.heading}>{props.heading}</h1>
             <button className={style.loginButton}>
                 {props.isAuth ? props.login 
-                : <NavLink to="/login/">{props.loginText}</NavLink>}
+                : <NavLink to="/login">{props.loginText}</NavLink>}
             </button>
         </header>
     );

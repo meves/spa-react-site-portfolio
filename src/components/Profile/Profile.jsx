@@ -8,7 +8,7 @@ const Profile = (props) => {
     return (
         <section className={style.sectionBlog}>
             {props.profile ? <h2>{props.profile.fullName}</h2> : <h2>{props.message}</h2>}
-            <ProfileInfo profile={props.profile} />
+            <ProfileInfo {...props} />
             <AddPostContainer />
             <PostsContainer />
         </section>

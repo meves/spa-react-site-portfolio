@@ -1,5 +1,6 @@
 import Footer from "./Footer";
 import { connect } from "react-redux";
+import { compose } from 'redux';
 
 const mapStateToProps = (state) => {
     return {
@@ -10,6 +11,4 @@ const mapStateToProps = (state) => {
     };
 }
 
-const FooterContainer = connect(mapStateToProps, {})(Footer);
-
-export default FooterContainer;
+export default compose(connect(mapStateToProps, {})(Footer));

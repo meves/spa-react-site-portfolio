@@ -1,7 +1,7 @@
 import AddPost from "./AddPost";
 import { connect } from 'react-redux';
-import { handleFocus, handleBlur, handleChange,
-         addNewPost } from "../../../redux/profile-reducer";
+import { handleFocus, handleBlur, handleChange, addNewPost } from "../../../redux/profile-reducer";
+import { compose } from 'redux';
 
 const mapStateToProps = (state) => {
     return {
@@ -14,6 +14,4 @@ const mapStateToProps = (state) => {
     };
 }
 
-export default connect(mapStateToProps, {
-    handleFocus, handleBlur, handleChange, addNewPost
-})(AddPost);
+export default compose(connect(mapStateToProps, { handleFocus, handleBlur, handleChange, addNewPost }))(AddPost);

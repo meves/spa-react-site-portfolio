@@ -1,13 +1,14 @@
-import { usersAPI } from "../api/api";
+import { profileAPI } from "../api/api";
 
-export const ADD_NEW_POST = 'ADD_NEW_POST';
-export const CLEAR_THEME = 'CLEAR_THEME';
-export const FILL_THEME = 'FILL_THEME';
-export const CLEAR_TEXT = 'CLEAR_TEXT'; 
-export const FILL_TEXT = 'FILL_TEXT';
-export const ADD_SYMBOL_TO_THEME = 'ADD_SYMBOL_TO_THEME';
-export const ADD_SYMBOL_TO_TEXT = 'ADD_SYMBOL_TO_TEXT';
-export const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const ADD_NEW_POST = 'ADD_NEW_POST';
+const CLEAR_THEME = 'CLEAR_THEME';
+const FILL_THEME = 'FILL_THEME';
+const CLEAR_TEXT = 'CLEAR_TEXT'; 
+const FILL_TEXT = 'FILL_TEXT';
+const ADD_SYMBOL_TO_THEME = 'ADD_SYMBOL_TO_THEME';
+const ADD_SYMBOL_TO_TEXT = 'ADD_SYMBOL_TO_TEXT';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_USER_STATUS = 'SET_USER_STATUS';
 
 const PLACEHOLDER_THEME = 'Theme';
 const PLACEHOLDER_TEXT = 'add text here...';
@@ -29,7 +30,8 @@ const initialState = {
             {id: 2, avatar: '/img/avatar.jpg', theme: 'Rivers', text: 'Text about rivers', date: '02.09.2021'}
         ]
     },
-    profile: null
+    profile: null,
+    status: ''
 };
 
 export const blogReducer = (state=initialState, action) => {
@@ -108,6 +110,11 @@ export const blogReducer = (state=initialState, action) => {
                 ...state,
                 profile: action.profile
             };
+        case SET_USER_STATUS:
+            return {
+                ...state,
+                status: action.status
+            };
         default:
             return state;
     }
@@ -150,10 +157,17 @@ export const setUserProfile = (profile) => {
     };
 }
 
+export const setUserStatus = (status) => {
+    return {
+        type: SET_USER_STATUS,
+        status
+    };
+}
+
 // thunk creators
 export const getUserProfile = (userId) => {
     return (dispatch) => {
-        usersAPI.getUserProfile(userId).then(data => 
+        profileAPI.getUserProfile(userId).then(data => 
             dispatch(setUserProfile(data)));
     }
 }
@@ -188,6 +202,24 @@ export const handleChange = (name, text) => {
         if (name === 'text') {
             dispatch(addSymbolToText(text));
         }
+    }
+}
+
+export const getUserStatus = (userId) => {
+    return (dispatch) => {
+        profileAPI.getUserStatus(userId).then(status => {
+            dispatch(setUserStatus(status));
+        });
+    };
+}
+
+export const updateUserStatus = (status) => {
+    return (dispatch) => {
+        profileAPI.updateUserStatus(status).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(setUserStatus(status));
+            }
+        });
     }
 }
 

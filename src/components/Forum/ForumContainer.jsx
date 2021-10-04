@@ -1,26 +1,13 @@
-import React from 'react';
-import { Redirect } from 'react-router-dom';
 import Forum from "./Forum";
 import { connect } from "react-redux";
-
-class ForumContainer extends React.Component {
-    render() {
-        if (!this.props.isAuth) {
-            return (
-                <Redirect to="/login" />
-            );
-        }
-        return (
-            <Forum {...this.props} />
-        );
-    }
-}
+import { withAuthRedirect } from "../../hoc/withAithRedirect";
+import { compose } from 'redux';
 
 const mapStateToProps = (state) => {
     return {
-        message: state.forumPage.message,
-        isAuth: state.auth.isAuth
+        message: state.forumPage.message
     };
 }
 
-export default connect(mapStateToProps, {})(ForumContainer);
+ export default compose(connect(mapStateToProps, {}),
+                        withAuthRedirect)(Forum);

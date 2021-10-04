@@ -8,23 +8,34 @@ const ax = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/'
 });
 
-export const usersAPI = {    
-    getUserProfile(userId) {
-        return ax.get(`profile/${userId}`).then(response => response.data);
-    },
+export const usersAPI = { 
+    getUsers(page, count) {
+        return ax.get(`users?page=${page}&count=${count}`).then(response => response.data);
+    }
+};
+export const followAPI = {
     unfollowUser(userId) {
         return  ax.delete(`follow/${userId}`).then(response => response.data);
     },
     followUser(userId) {
         return ax.post(`follow/${userId}`).then(response => response.data);
     },
-    getUsers(page, count) {
-        return ax.get(`users?page=${page}&count=${count}`).then(response => response.data);
-    }
-};
+}; 
 
 export const authAPI = {
     authMe() {
         return ax.get(`auth/me`).then(response => response.data);
+    }
+};
+
+export const profileAPI = {
+    getUserProfile(userId) {
+        return ax.get(`profile/${userId}`).then(response => response.data);
+    },
+    getUserStatus(userId) {
+        return ax.get(`profile/status/${userId}`).then(response => response.data);
+    },
+    updateUserStatus(status) {
+        return ax.put(`profile/status`, {status}).then(response => response.data);
     }
 };

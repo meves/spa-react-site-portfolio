@@ -1,4 +1,4 @@
-import { usersAPI } from "../api/api";
+import { usersAPI, followAPI } from "../api/api";
 // constants
 const FOLLOW_USER = 'FOLLOW_USER';
 const UNFOLLOW_USER = 'NFOLLOW_USER';
@@ -170,7 +170,7 @@ export const getCurrentPageUsers = (currentPage, count) => {
 export const follow = (userId) => {
     return (dispatch) => {
         dispatch(toggleFollowingProgress(true, userId));
-        usersAPI.followUser(userId).then(data => {
+        followAPI.followUser(userId).then(data => {
             if (data.resultCode === 0) {
                 dispatch(followUser(userId));
                 dispatch(toggleFollowingProgress(false, userId));
@@ -182,7 +182,7 @@ export const follow = (userId) => {
 export const unfollow = (userId) => {
     return (dispatch) => {
         dispatch(toggleFollowingProgress(true, userId));
-        usersAPI.unfollowUser(userId).then(data => {
+        followAPI.unfollowUser(userId).then(data => {
             if (data.resultCode === 0) {
                 dispatch(unfollowUser(userId));
                 dispatch(toggleFollowingProgress(false, userId));
