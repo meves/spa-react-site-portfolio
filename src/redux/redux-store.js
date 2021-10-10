@@ -10,6 +10,7 @@ import contactsReducer from './contacts-reducer';
 import footerReducer from './footer-reducer';
 import usersReducer from './users-reducer';
 import authReducer from './auth-reducer';
+import { reducer as formReducer } from 'redux-form';
 
 const reducers = combineReducers({
     headerPage: headerReducer,
@@ -21,7 +22,8 @@ const reducers = combineReducers({
     contactsPage: contactsReducer,
     footerPage: footerReducer,
     usersPage: usersReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer
 });
 const store = createStore(reducers, applyMiddleware(thunk));
 window.store = store;

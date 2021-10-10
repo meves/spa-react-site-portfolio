@@ -25,6 +25,12 @@ export const followAPI = {
 export const authAPI = {
     authMe() {
         return ax.get(`auth/me`).then(response => response.data);
+    },
+    login(email, password, rememberMe) {
+        return ax.post(`auth/login`, {email, password, rememberMe}).then(response => response.data);
+    },
+    logout() {
+        return ax.delete(`auth/login`).then(response => response.data);
     }
 };
 
