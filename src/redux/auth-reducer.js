@@ -1,12 +1,13 @@
 import { authAPI } from "../api/api";
+import { stopSubmit } from 'redux-form';
 
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA';
 
 const initialState = {
-    isAuth: false,
     id: null,
     login: null,
-    email: null
+    email: null,
+    isAuth: false
 };
 
 const authReducer = (state=initialState, action) => {
@@ -14,10 +15,7 @@ const authReducer = (state=initialState, action) => {
         case SET_AUTH_USER_DATA:
             return {
                 ...state,
-                id: action.authUserData.id,
-                login: action.authUserData.login,
-                email: action.authUserData.email,
-                isAuth: true
+                ...action.payload
             }
         default:
             return state;
@@ -25,10 +23,10 @@ const authReducer = (state=initialState, action) => {
 };
 
 // action creator
-export const setAuthUserData = (id, login, email) => {
+export const setAuthUserData = (id, login, email, isAuth) => {
     return {
         type: SET_AUTH_USER_DATA,
-        authUserData: {id, login, email}
+        payload: { id, login, email, isAuth }
     };
 }
 
@@ -38,10 +36,29 @@ export const authMe = () => {
         authAPI.authMe().then(data => {
             if (data.resultCode === 0) {
                 let {id, login, email} = data.data;
-                dispatch(setAuthUserData(id, login, email));
+                dispatch(setAuthUserData(id, login, email, true));
             }
         });
     }
+}
+
+export const loginUser = (email, password, rememberMe) => dispatch => {
+    authAPI.login(email, password, rememberMe).then(data => {
+        if (data.resultCode === 0) {
+            dispatch(authMe());
+        } else {
+            let message = data.messages.length > 0 ? data.messages[0] : 'Login or Password is wrong';
+            dispatch(stopSubmit('login', {_error: message}));
+        }
+    });
+}
+
+export const logoutUser = () => dispatch => {
+    authAPI.logout().then(data => {
+        if (data.resultCode === 0) {
+            dispatch(setAuthUserData(null, null, null, false));
+        }
+    })
 }
 
 export default authReducer;
