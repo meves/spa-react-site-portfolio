@@ -9,4 +9,6 @@ const mapStateToProps = (state) => {
     };
 }
 
-export default compose(connect(mapStateToProps, {}), withAuthRedirect)(Shop);
+export default compose(
+    connect(mapStateToProps, {}), 
+    withAuthRedirect)(Shop);

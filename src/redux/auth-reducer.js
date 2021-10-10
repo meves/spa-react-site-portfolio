@@ -33,7 +33,7 @@ export const setAuthUserData = (id, login, email, isAuth) => {
 // thunk creator
 export const authMe = () => {
     return (dispatch) => {
-        authAPI.authMe().then(data => {
+        return authAPI.authMe().then(data => {
             if (data.resultCode === 0) {
                 let {id, login, email} = data.data;
                 dispatch(setAuthUserData(id, login, email, true));

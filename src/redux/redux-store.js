@@ -11,6 +11,7 @@ import footerReducer from './footer-reducer';
 import usersReducer from './users-reducer';
 import authReducer from './auth-reducer';
 import { reducer as formReducer } from 'redux-form';
+import appReducer from './app-reducer';
 
 const reducers = combineReducers({
     headerPage: headerReducer,
@@ -23,7 +24,8 @@ const reducers = combineReducers({
     footerPage: footerReducer,
     usersPage: usersReducer,
     auth: authReducer,
-    form: formReducer
+    form: formReducer,
+    app: appReducer
 });
 const store = createStore(reducers, applyMiddleware(thunk));
 window.store = store;
