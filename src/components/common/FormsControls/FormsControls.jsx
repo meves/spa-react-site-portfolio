@@ -20,7 +20,6 @@ export const CheckBox = ({input, type, label, meta:{touched, error, warning}}) =
         </div>
     );
 }
-<<<<<<< HEAD
 
 export const Textarea = ({input, cols, rows, placeholder, meta: {touched, error, warning}}) => {
     const hasError = touched && (error || warning);
@@ -31,5 +30,3 @@ export const Textarea = ({input, cols, rows, placeholder, meta: {touched, error,
         </div>
     );
 }
-=======
->>>>>>> ea1314901a69ba3dccd0bb20300f86d8ef72a6b4
