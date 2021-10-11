@@ -1,5 +1,5 @@
 const initialState = {
-    message: 'Contacts'
+    
 };
 
 const contactsReducer = (state=initialState, action) => {

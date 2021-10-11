@@ -1,5 +1,7 @@
 import React from 'react';
 import style from './Footer.module.scss';
+import { connect } from "react-redux";
+import { compose } from 'redux';
 
 const Footer = (props) => {
     return (
@@ -12,4 +14,13 @@ const Footer = (props) => {
     );
 };
 
-export default Footer;
+const mapStateToProps = (state) => {
+    return {
+        author: state.footerPage.author,
+        data: state.footerPage.data,
+        email: state.footerPage.email,
+        tel: state.footerPage.tel
+    };
+}
+
+export default compose(connect(mapStateToProps, null)(Footer));

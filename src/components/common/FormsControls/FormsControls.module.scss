@@ -4,3 +4,8 @@
 .input.warning span {
     color: green;
 }
+
+.input > span {
+    font-size: 0.6rem;
+    padding-left: 1em;
+}

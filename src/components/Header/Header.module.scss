@@ -27,7 +27,7 @@
         color: var(--dark-color);
     }
 
-    .loginButton {
+    .login {
         font-family: 'Lobster';
         font-size: 1rem;
         letter-spacing: 0.15em;
@@ -48,6 +48,17 @@
             text-decoration: none;
             text-transform: lowercase;
         }
+    }
+
+    .button {
+        margin-left: 1em;
+        padding: 0.3em 1em;
+        text-transform: uppercase;
+    }
+    .button:hover {
+        cursor: pointer;
+        background-color: var(--dark-color);
+        color: var(--super-light-color);
     }
 }
 

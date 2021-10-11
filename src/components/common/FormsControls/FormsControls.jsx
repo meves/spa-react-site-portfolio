@@ -20,3 +20,13 @@ export const CheckBox = ({input, type, label, meta:{touched, error, warning}}) =
         </div>
     );
 }
+
+export const Textarea = ({input, cols, rows, placeholder, meta: {touched, error, warning}}) => {
+    const hasError = touched && (error || warning);
+    return (
+        <div className={style.input + " " + (hasError ? style.error : '')}>
+            <textarea {...input} cols={cols} rows={rows} placeholder={placeholder}/>
+            {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+        </div>
+    );
+}
