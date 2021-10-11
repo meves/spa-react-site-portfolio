@@ -11,7 +11,10 @@ import footerReducer from './footer-reducer';
 import usersReducer from './users-reducer';
 import authReducer from './auth-reducer';
 import { reducer as formReducer } from 'redux-form';
+<<<<<<< HEAD
 import appReducer from './app-reducer';
+=======
+>>>>>>> ea1314901a69ba3dccd0bb20300f86d8ef72a6b4
 
 const reducers = combineReducers({
     headerPage: headerReducer,
@@ -24,8 +27,12 @@ const reducers = combineReducers({
     footerPage: footerReducer,
     usersPage: usersReducer,
     auth: authReducer,
+<<<<<<< HEAD
     form: formReducer,
     app: appReducer
+=======
+    form: formReducer
+>>>>>>> ea1314901a69ba3dccd0bb20300f86d8ef72a6b4
 });
 const store = createStore(reducers, applyMiddleware(thunk));
 window.store = store;
