@@ -13,7 +13,7 @@ export const URL = '/img/avatar_2.png';
 const initialState = {
     users: [],
     currentPage: 1,
-    count: 4,
+    count: 5,
     totalCount: 0,
     isFetching: true,
     followingProgress: []

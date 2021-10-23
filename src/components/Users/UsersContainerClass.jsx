@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Users from "./Users";
 import { connect } from 'react-redux';
 import { follow, unfollow, getUsers, getCurrentPageUsers} from "../../redux/users-reducer";
@@ -7,17 +7,18 @@ import { withAuthRedirect } from '../../hoc/withAithRedirect';
 import { receiveUsers, receiveCurrentPage, receiveCount, receiveTotalCount,
          receiveIsFetching, receiveFollowingProgress } from '../../redux/selectors/users-selectors';
 
-const UsersContainer = (props) => {    
-    useEffect(() => {
-        props.getUsers(props.currentPage, props.count);
-        // eslint-disable-next-line
-    }, []);   
-    const onPageNumberClickHandler = (currentPage) => {
-        props.getCurrentPageUsers(currentPage, props.count);        
+class UsersContainer extends React.Component {
+    componentDidMount() {
+        this.props.getUsers(this.props.currentPage, this.props.count);        
     }
-    return (
-        <Users {...props} onPageNumberClickHandler={onPageNumberClickHandler}/>
-    );    
+    onPageNumberClickHandler = (currentPage) => {
+        this.props.getCurrentPageUsers(currentPage, this.props.count);        
+    }
+    render () {
+        return (
+            <Users {...this.props} onPageNumberClickHandler={this.onPageNumberClickHandler}/>
+        );
+    }
 }
 
 const mapStateToProps = (state) => {
