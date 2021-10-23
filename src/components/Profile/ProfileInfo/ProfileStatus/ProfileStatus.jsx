@@ -1,50 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import style from './ProfileStatus.module.scss';
 
-class ProfileStatus extends React.Component {
-    state = {
-        status: this.props.status,
-        editMode: false
-    };        
-    onChangeHandler = (event) => {
+const ProfileStatus = (props) => {
+    const [status, setStatus] = useState(props.status);
+    const [editMode, setEditMode] = useState(false);        
+    const onChangeHandler = (event) => {
         let text = event.currentTarget.value;
-        this.setState(() => ({
-            status: text
-        }));
+        setStatus(text);
     }
-    activateMode = () => {
-        this.setState(({
-            editMode: true
-        }));
+    const activateMode = () => {
+        setEditMode(true);
     }
-    deactivateMode = () => {
-        this.setState(({
-            editMode: false
-        }));
-        this.props.updateUserStatus(this.state.status);
+    const deactivateMode = () => {
+        setEditMode(false);
+        props.updateUserStatus(status);
     }
-    componentDidUpdate(prevProps, prevState) {
-        if (prevProps.status !== this.props.status) {
-            this.setState(({
-                status: this.props.status
-            }));
-        }
-    }
-    render() {
-        return (
+    useEffect(() => {
+        setStatus(props.status);
+    }, [props.status]);    
+    return (
+        <div>
+            {!editMode ?
             <div>
-                {!this.state.editMode ?
-                <div>
-                    <span onClick={this.activateMode} className={style.userStatus}>{this.props.status}</span>
-                </div> :
-                <div>
-                    <input onChange={this.onChangeHandler} 
-                           onBlur={this.deactivateMode}
-                           type="text" value={this.state.status} />
-                </div>}
-            </div>
-        );
-    }
+                <span onClick={activateMode} className={style.userStatus}>{props.status}</span>
+            </div> :
+            <div>
+                <input onChange={onChangeHandler} 
+                        onBlur={deactivateMode}
+                        type="text" value={status} />
+            </div>}
+        </div>
+    );    
 }
 
 export default ProfileStatus;
