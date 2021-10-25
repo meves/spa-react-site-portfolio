@@ -14,7 +14,7 @@ const initialState = {
     status: ''
 };
 
-export const blogReducer = (state=initialState, action) => {
+export const profileReducer = (state=initialState, action) => {
     switch(action.type) { 
         case profileConst.ADD_NEW_POST: 
             let lastIndex = state.myPost.posts.length - 1;
@@ -31,7 +31,15 @@ export const blogReducer = (state=initialState, action) => {
                                 date: new Date().toLocaleDateString()
                             }]        
                 },
-            } 
+            }
+        case profileConst.DELETE_POST:
+            return {
+                ...state,
+                myPost: {
+                    ...state.myPost,                
+                    posts: state.myPost.posts.filter(post => post.id !== action.postId)
+                }
+            };
         case profileConst.SET_USER_PROFILE: 
             return {
                 ...state,
@@ -52,6 +60,13 @@ export const addNewPost = (theme, text) => ({
     theme,
     text
 });
+
+export const deletePost = (postId) => {
+    return {
+        type: profileConst.DELETE_POST,
+        postId
+    }
+}
 
 export const setUserProfile = (profile) => {
     return {
@@ -85,4 +100,4 @@ export const updateUserStatus = (status) => async (dispatch) => {
     }
 }
 
-export default blogReducer;
+export default profileReducer;

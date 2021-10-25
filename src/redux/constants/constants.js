@@ -12,6 +12,7 @@ export const forumConst = {
 
 export const profileConst = {
     ADD_NEW_POST: 'site-portfolio/medvedkinsergey.ru/profile/ADD_NEW_POST',
+    DELETE_POST: 'site-portfolio/medvedkinsergey.ru/profile/DELETE_POST',
     SET_USER_PROFILE: 'site-portfolio/medvedkinsergey.ru/profile/SET_USER_PROFILE',
     SET_USER_STATUS: 'site-portfolio/medvedkinsergey.ru/profile/SET_USER_STATUS'
 }
