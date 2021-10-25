@@ -1,6 +1,5 @@
 import { authMe } from "./auth-reducer";
-
-const INIT_SUCCESS = 'INIT_SUCCES';
+import { appConst } from "./constants/constants";
 
 const initialState = {
     initialized: false,
@@ -9,7 +8,7 @@ const initialState = {
 
 const appReducer = (state=initialState, action) => {
     switch (action.type) {
-        case INIT_SUCCESS:
+        case appConst.INIT_SUCCESS:
             return {
                 ...state,
                 initialized: true,
@@ -22,7 +21,7 @@ const appReducer = (state=initialState, action) => {
 
 // action creator
 export const setInitSuccess = () => ({
-    type: INIT_SUCCESS
+    type: appConst.INIT_SUCCESS
 })
 
 // thunk creator 

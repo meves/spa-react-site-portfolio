@@ -1,4 +1,4 @@
-const ADD_NEW_MESSAGE = 'ADD_NEW_MESSAGE'; 
+import { forumConst } from "./constants/constants"; 
 
 const initialState = {
     messages: [
@@ -12,7 +12,7 @@ const initialState = {
 
 const forumReducer = (state=initialState, action) => {
     switch (action.type) {
-        case ADD_NEW_MESSAGE:
+        case forumConst.ADD_NEW_MESSAGE:
             return {
                 ...state,
                 messages: [...state.messages, {id: state.messages.length, avatarUrl: '/img/avatar.jpg', ...action.message}]
@@ -25,7 +25,7 @@ const forumReducer = (state=initialState, action) => {
 // action creators
 export const addNewMessage = (message) => {
     return {
-        type: ADD_NEW_MESSAGE,
+        type: forumConst.ADD_NEW_MESSAGE,
         message
     }
 }

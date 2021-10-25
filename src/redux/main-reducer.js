@@ -1,6 +1,3 @@
-// constants 
-
-
 // initialState
 const intialState = {
     message: 'Main',
