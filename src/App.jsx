@@ -1,8 +1,12 @@
-import './App.scss';
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router';
+import { Route, BrowserRouter } from 'react-router-dom';
+import store from './redux/redux-store';
+
+import './App.scss';
+import { initializeApp } from './redux/app-reducer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import NavbarContainer from './components/Nav/NavbarContainer';
 import MainContainer from './components/Main/MainContainer';
@@ -13,9 +17,7 @@ import ContactsContainer from './components/Contacts/Contacts';
 import FooterContainer from './components/Footer/Footer';
 import UsersContainer from './components/Users/UsersContainer';
 import LoginPage from './components/Login/Login';
-import { Route } from 'react-router-dom';
 import Preloader from './components/common/Preloader/Preloader';
-import { initializeApp } from './redux/app-reducer';
 
 class App extends React.Component {
   componentDidMount() {
@@ -26,17 +28,17 @@ class App extends React.Component {
       return <Preloader isFetching={this.props.isFetching}/>
     }
     return (
-      <div className="App">
-        <HeaderContainer/>
-        <NavbarContainer/>
-          <Route path="/main" render={() => <MainContainer/>} />
-          <Route path="/profile/:userId?" render={() => <ProfileContainer/>} />
-          <Route path="/forum" render={() => <ForumContainer/>} />
-          <Route path="/users" render={() => <UsersContainer/>} />
-          <Route path='/shop' render={() => <ShopContainer/>} />
-          <Route path="/contacts" render={() => <ContactsContainer/>} />
-          <Route path="/login" render={() => <LoginPage/> } />
-        <FooterContainer/> 
+      <div className="App">        
+          <HeaderContainer/>
+          <NavbarContainer/>
+            <Route path="/main" render={() => <MainContainer/>} />
+            <Route path="/profile/:userId?" render={() => <ProfileContainer/>} />
+            <Route path="/forum" render={() => <ForumContainer/>} />
+            <Route path="/users" render={() => <UsersContainer/>} />
+            <Route path='/shop' render={() => <ShopContainer/>} />
+            <Route path="/contacts" render={() => <ContactsContainer/>} />
+            <Route path="/login" render={() => <LoginPage/> } />
+          <FooterContainer/>        
       </div>    
     );
   }
@@ -47,6 +49,16 @@ const mapStateToProps = (state) => ({
   isFetching: state.app.isFetching 
 })
 
-export default compose(
-  connect(mapStateToProps, {initializeApp}),
-  withRouter)(App);
+const AppContainer = compose(withRouter, connect(mapStateToProps, {initializeApp}))(App);
+
+const MainApp = (props) => {
+  return (
+    <BrowserRouter>
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>        
+    </BrowserRouter>
+  )
+}
+
+export default MainApp;
