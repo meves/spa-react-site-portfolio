@@ -1,23 +1,24 @@
 import React from 'react';
-import { connect, Provider } from 'react-redux';
 import { compose } from 'redux';
+import { connect, Provider } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Route, BrowserRouter } from 'react-router-dom';
 import store from './redux/redux-store';
+import { initializeApp } from './redux/app-reducer';
+import { withSuspense } from './hoc/withSuspense';
 
 import './App.scss';
-import { initializeApp } from './redux/app-reducer';
+import Preloader from './components/common/Preloader/Preloader';
 import HeaderContainer from './components/Header/HeaderContainer';
 import NavbarContainer from './components/Nav/NavbarContainer';
-import MainContainer from './components/Main/MainContainer';
-import ProfileContainer from './components/Profile/ProfileContainer';
-import ForumContainer from './components/Forum/ForumContainer';
-import ShopContainer from './components/Shop/ShopContainer';
-import ContactsContainer from './components/Contacts/Contacts';
 import FooterContainer from './components/Footer/Footer';
-import UsersContainer from './components/Users/UsersContainerClass';
-import LoginPage from './components/Login/Login';
-import Preloader from './components/common/Preloader/Preloader';
+const MainContainer = React.lazy(() => import('./components/Main/MainContainer'));
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
+const ForumContainer = React.lazy(() => import('./components/Forum/ForumContainer'));
+const UsersContainer = React.lazy(() => import('./components/Users/UsersContainerClass'));
+const ShopContainer = React.lazy(() => import('./components/Shop/ShopContainer'));
+const ContactsContainer = React.lazy(() => import('./components/Contacts/Contacts'));
+const LoginPage = React.lazy(() => import('./components/Login/Login'));
 
 class App extends React.Component {
   componentDidMount() {
@@ -31,13 +32,13 @@ class App extends React.Component {
       <div className="App">        
           <HeaderContainer/>
           <NavbarContainer/>
-            <Route path="/main" render={() => <MainContainer/>} />
-            <Route path="/profile/:userId?" render={() => <ProfileContainer/>} />
-            <Route path="/forum" render={() => <ForumContainer/>} />
-            <Route path="/users" render={() => <UsersContainer/>} />
-            <Route path='/shop' render={() => <ShopContainer/>} />
-            <Route path="/contacts" render={() => <ContactsContainer/>} />
-            <Route path="/login" render={() => <LoginPage/> } />
+            <Route path="/main" render={() => withSuspense(MainContainer)} />
+            <Route path="/profile/:userId?" render={() => withSuspense(ProfileContainer)} />
+            <Route path="/forum" render={() => withSuspense(ForumContainer)} />
+            <Route path="/users" render={() => withSuspense(UsersContainer)} />
+            <Route path='/shop' render={() => withSuspense(ShopContainer)} />
+            <Route path="/contacts" render={() => withSuspense(ContactsContainer)} />
+            <Route path="/login" render={() => withSuspense(LoginPage)} />
           <FooterContainer/>        
       </div>    
     );
