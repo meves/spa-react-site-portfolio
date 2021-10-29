@@ -5,18 +5,15 @@
 :root {
   box-sizing: border-box;
   font-size: calc(0.5em + 1vw);
-}
-
-*, *::before, *::after {
-  box-sizing: inherit;
-}
-
-html {
   --bg-color2: hsl(200, 50%, 50%);
   --bg-color: hsla(234, 80%, 52%, 0.815);
   --dark-color: #333;
   --light-color: #bbb;
   --super-light-color: #ddd;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
 }
 
 body {

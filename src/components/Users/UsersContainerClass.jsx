@@ -11,12 +11,12 @@ class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.count);        
     }
-    onPageNumberClickHandler = (currentPage) => {
+    handlePageNumberClick = (currentPage) => {
         this.props.getCurrentPageUsers(currentPage, this.props.count);        
     }
     render () {
         return (
-            <Users {...this.props} onPageNumberClickHandler={this.onPageNumberClickHandler}/>
+            <Users {...this.props} handlePageNumberClick={this.handlePageNumberClick}/>
         );
     }
 }

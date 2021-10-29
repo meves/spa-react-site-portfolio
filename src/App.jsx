@@ -15,7 +15,7 @@ import ForumContainer from './components/Forum/ForumContainer';
 import ShopContainer from './components/Shop/ShopContainer';
 import ContactsContainer from './components/Contacts/Contacts';
 import FooterContainer from './components/Footer/Footer';
-import UsersContainer from './components/Users/UsersContainer';
+import UsersContainer from './components/Users/UsersContainerClass';
 import LoginPage from './components/Login/Login';
 import Preloader from './components/common/Preloader/Preloader';
 

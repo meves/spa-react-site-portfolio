@@ -167,7 +167,7 @@ export const follow = (userId) => async (dispatch) => {
 }
 
 export const unfollow = (userId) => async (dispatch) => {
-    followUnfollow(dispatch, userId, followAPI.unfollowUser.bind(followAPI), followUser);
+    followUnfollow(dispatch, userId, followAPI.unfollowUser.bind(followAPI), unfollowUser);
 }
 
 export default usersReducer;

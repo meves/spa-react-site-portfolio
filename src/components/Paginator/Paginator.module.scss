@@ -1,0 +1,28 @@
+.paginationWrapper {
+    display: flex;
+}
+
+.pagesWrapper {
+    display: flex;
+    justify-content: space-around;
+    width: 25em;
+}
+
+.paginationNumber {
+    flex: 1;
+    margin-right: 0.5em;
+    font-size: 0.75rem;
+}
+.paginationNumber:hover {
+    cursor: pointer;
+    color: var(--bg-color);
+}
+.paginationNumber:first-child {
+    margin-left: 0.4em;
+}
+
+.currentNumber {
+    font-weight: bold;
+    text-decoration: underline;
+    color: red;
+}

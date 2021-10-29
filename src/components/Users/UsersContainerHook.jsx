@@ -9,14 +9,13 @@ import { receiveUsers, receiveCurrentPage, receiveCount, receiveTotalCount,
 
 const UsersContainer = (props) => {    
     useEffect(() => {
-        props.getUsers(props.currentPage, props.count);
-        // eslint-disable-next-line
-    }, []);   
-    const onPageNumberClickHandler = (currentPage) => {
+        props.getUsers(props.currentPage, props.count);        
+    }, [props.currentPage, props.count, props]);   
+    const handlePageNumberClick = (currentPage) => {
         props.getCurrentPageUsers(currentPage, props.count);        
     }
     return (
-        <Users {...props} onPageNumberClickHandler={onPageNumberClickHandler}/>
+        <Users {...props} handlePageNumberClick={handlePageNumberClick}/>
     );    
 }
 
