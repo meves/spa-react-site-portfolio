@@ -6,7 +6,8 @@ const initialState = {
     id: null,
     login: null,
     email: null,
-    isAuth: false
+    isAuth: false,
+    captchaUrl: null
 };
 
 const authReducer = (state=initialState, action) => {
@@ -15,6 +16,11 @@ const authReducer = (state=initialState, action) => {
             return {
                 ...state,
                 ...action.payload
+            }
+        case authConst.SET_CAPTCHA_URL:
+            return {
+                ...state,
+                captchaUrl: action.captchaUrl
             }
         default:
             return state;
@@ -29,6 +35,11 @@ export const setAuthUserData = (id, login, email, isAuth) => {
     };
 }
 
+const setCaptchaUrl = captchaUrl => ({
+    type: authConst.SET_CAPTCHA_URL,
+    captchaUrl
+})
+
 // thunk creator
 export const authMe = () =>  async (dispatch) => {
     const data = await authAPI.authMe();
@@ -38,14 +49,22 @@ export const authMe = () =>  async (dispatch) => {
     }
 }
 
-export const loginUser = (email, password, rememberMe) => async  (dispatch) => {
-    const data = await authAPI.login(email, password, rememberMe);
+export const loginUser = (email, password, rememberMe, captcha) => async  (dispatch) => {
+    const data = await authAPI.login(email, password, rememberMe, captcha);
     if (data.resultCode === 0) {
         dispatch(authMe());
     } else {
+        if (data.resultCode === 10) {
+            dispatch(getCaptchaUrl());
+        }
         let message = data.messages.length > 0 ? data.messages[0] : 'Login or Password is wrong';
         dispatch(stopSubmit('login', {_error: message}));
     }   
+}
+
+const getCaptchaUrl = () => async dispatch => {
+    const data = await authAPI.getCaptcha();
+    dispatch(setCaptchaUrl(data.url));
 }
 
 export const logoutUser = () => async (dispatch) => {

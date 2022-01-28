@@ -1,6 +1,7 @@
 import React from "react";
 import style from './Paginator.module.scss'; 
 import { useState } from 'react';
+import classNames from "classnames";
 
 const Paginator = (props) => {
     const [currentBlock, setCurrentBlock] = useState(1);
@@ -13,13 +14,13 @@ const Paginator = (props) => {
     
     const blocks = [];
     for (let i = left; i <= right && i <= numberOfPages; i++) {
-        const classes = `${style.paginationNumber} ` + 
-            `${i === props.currentPage && style.currentNumber}`;
-            blocks.push(<div className={classes} key={i}
-                        onClick={() => {
-                            props.handlePageNumberClick(i);
-                        }}
-                    >{i}</div>);
+        const classes = classNames(style.paginationNumber, {
+                                  [style.currentNumber]: i === props.currentPage
+                        });            
+        blocks.push(<div className={classes} key={i}
+                         onClick={() => {props.handlePageNumberClick(i);}}>{i}
+                    </div>
+        );
     }
     return (
         <div className={style.paginationWrapper}>

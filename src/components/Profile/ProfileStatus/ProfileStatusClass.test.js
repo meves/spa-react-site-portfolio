@@ -1,7 +1,7 @@
 import React from 'react';
 import { create } from 'react-test-renderer';
 import ProfileStatus from './ProfileStatusClass';
-import { updateUserStatus } from '../../../../redux/profile-reducer';
+import { updateUserStatus } from '../../../redux/profile-reducer';
 
 const status = 'Hello, friends!';
 

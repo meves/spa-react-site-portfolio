@@ -12,11 +12,11 @@ export const Input = ({input, type, label, placeholder, meta:{touched, error, wa
     );
 } 
 
-export const CheckBox = ({input, type, label, meta:{touched, error, warning}}) => {
+export const Checkbox = ({input, type, label, meta:{touched, error, warning}}) => {
     return (
         <div >
-            <label >{label} </label>
             <input {...input} type={type}/>
+            <label >{ label} </label>
         </div>
     );
 }

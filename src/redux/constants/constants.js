@@ -3,7 +3,8 @@ export const appConst = {
 }
 
 export const authConst = {
-    SET_AUTH_USER_DATA: 'site-portfolio/medvedkinsergey.ru/auth/SET_AUTH_USER_DATA'
+    SET_AUTH_USER_DATA: 'site-portfolio/medvedkinsergey.ru/auth/SET_AUTH_USER_DATA',
+    SET_CAPTCHA_URL: 'site-portfolio/medvedkinsergey.ru/auth/SET_CAPTCHA_URL'
 }
 
 export const forumConst = {
@@ -14,7 +15,8 @@ export const profileConst = {
     ADD_NEW_POST: 'site-portfolio/medvedkinsergey.ru/profile/ADD_NEW_POST',
     DELETE_POST: 'site-portfolio/medvedkinsergey.ru/profile/DELETE_POST',
     SET_USER_PROFILE: 'site-portfolio/medvedkinsergey.ru/profile/SET_USER_PROFILE',
-    SET_USER_STATUS: 'site-portfolio/medvedkinsergey.ru/profile/SET_USER_STATUS'
+    SET_USER_STATUS: 'site-portfolio/medvedkinsergey.ru/profile/SET_USER_STATUS',
+    SAVE_PHOTOS: 'site-portfolio/medvedkinsergey.ru/profile/SAVE_PHOTOS'
 }
 
 export const usersConst = {

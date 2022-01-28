@@ -1,6 +1,6 @@
 const initialState = {
     logo: 'см',
-    heading: 'Web Developer Sergey Medvedkin',
+    heading: 'Web Development on React JS',
     loginText: 'Login'
 };
 

@@ -30,12 +30,16 @@ export const authAPI = {
         const response = await ax.get(`auth/me`);
         return response.data;
     },
-    async login(email, password, rememberMe) {
-        const response = await ax.post(`auth/login`, {email, password, rememberMe});
+    async login(email, password, rememberMe, captcha) {
+        const response = await ax.post(`auth/login`, {email, password, rememberMe, captcha});
         return response.data;
     },
     async logout() {
         const response = await ax.delete(`auth/login`);
+        return response.data;
+    },
+    async getCaptcha() {
+        const response = await ax.get(`security/get-captcha-url`);
         return response.data;
     }
 };
@@ -51,6 +55,16 @@ export const profileAPI = {
     },
     async updateUserStatus(status) {
         const response = await ax.put(`profile/status`, {status});
+        return response.data;
+    },
+    async loadFile(photoFile) {
+        const formData = new FormData();
+        formData.append('image', photoFile);
+        const response = await ax.put('profile/photo', formData, {headers: {'Content-Type': 'multipart/form-data'}});
+        return response.data;
+    },
+    async saveProfile(profile) {
+        const response = await ax.put('profile', profile);
         return response.data;
     }
 };

@@ -22,12 +22,16 @@ const ProfileStatus = (props) => {
         <div>
             {!editMode ?
             <div>
-                <span onClick={activateMode} className={style.userStatus}>{props.status}</span>
+                <span onClick={activateMode} className={style.userStatus}>
+                    {props.status}
+                </span>
             </div> :
-            <div>
+            <div>                
                 <input onChange={onChangeHandler} 
-                        onBlur={deactivateMode}
-                        type="text" value={status} />
+                       onBlur={deactivateMode}
+                       value={status}
+                       autoFocus 
+                />
             </div>}
         </div>
     );    
