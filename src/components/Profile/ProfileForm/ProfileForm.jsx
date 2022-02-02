@@ -3,6 +3,7 @@ import { reduxForm, Field } from 'redux-form';
 import { Input, Checkbox, Textarea } from '../../common/FormsControls/FormsControls';
 import { required } from '../../../utils/validators/validators';
 import styles from '../../common/FormsControls/FormsControls.module.scss';
+import { compose } from 'redux';
 
 const ProfileForm = props => {
     const handleClick = () => {
@@ -32,6 +33,4 @@ const ProfileForm = props => {
     )
 }
 
-const ProfileReduxForm = reduxForm({form: 'profileForm'})(ProfileForm);
-
-export default ProfileReduxForm;
+export default compose( reduxForm({form: 'profileForm'}) )(ProfileForm);

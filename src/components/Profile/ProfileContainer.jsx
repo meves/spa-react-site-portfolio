@@ -5,6 +5,8 @@ import { withRouter } from 'react-router';
 import { getUserProfile, getUserStatus, updateUserStatus, loadFile, saveProfileData } from '../../redux/profile-reducer';
 import { withAuthRedirect } from '../../hoc/withAithRedirect';
 import { compose } from 'redux';
+import { receiveProfile, receiveMessage, receiveStatus } from '../../redux/selectors/profile-selectors';
+import { receiveAuthId } from '../../redux/selectors/auth-selectors';
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
@@ -21,10 +23,10 @@ class ProfileContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        message: state.profilePage.message,
-        profile: state.profilePage.profile,
-        status: state.profilePage.status,
-        authId: state.auth.id
+        message: receiveMessage(state),
+        profile: receiveProfile(state),
+        status: receiveStatus(state),
+        authId: receiveAuthId(state)
     };
 }
 

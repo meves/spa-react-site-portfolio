@@ -12,4 +12,4 @@ const Contacts = (props) => {
     );
 };
 
-export default compose(connect(null, null), withAuthRedirect)(Contacts);
+export default compose( connect(null, null), withAuthRedirect )(Contacts);

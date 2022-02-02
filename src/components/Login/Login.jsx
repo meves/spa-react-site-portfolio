@@ -5,6 +5,7 @@ import { required, email, minLength8 } from '../../utils/validators/validators';
 import { Input, Checkbox } from '../common/FormsControls/FormsControls';
 import { loginUser } from '../../redux/auth-reducer';
 import { Redirect } from 'react-router-dom';
+import { receiveIsAuth, receiveCaptchaUrl } from '../../redux/selectors/auth-selectors';
 
 const LoginForm = (props) => {
     const { handleSubmit } = props;
@@ -54,8 +55,8 @@ const Login = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth,
-    captchaUrl: state.auth.captchaUrl
+    isAuth: receiveIsAuth(state),
+    captchaUrl: receiveCaptchaUrl(state)
 })
 
 export default connect(mapStateToProps, {loginUser})(Login);

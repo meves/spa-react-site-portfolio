@@ -43,4 +43,4 @@ const AddPost = (props) => {
     );
 };
 
-export default compose(connect(null, { addNewPost }))(AddPost);
+export default compose( connect(null, { addNewPost }) )(AddPost);

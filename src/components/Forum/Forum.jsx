@@ -25,7 +25,7 @@ const ForumReduxForm = reduxForm({form: 'addMessageForm'})(ForumForm);
 
 const Forum = (props) => {
     
-    const messages = props.messages.map(m => {
+    const messages = [...props.messages].reverse().map(m => {
         return <div className={style.media} key={m.id}>
                     <div className={style.user}>
                         <img src={m.avatarUrl} alt={m.name} />

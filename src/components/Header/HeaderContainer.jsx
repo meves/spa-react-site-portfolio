@@ -3,6 +3,8 @@ import Header from "./Header";
 import { connect } from 'react-redux';
 import { authMe, logoutUser } from '../../redux/auth-reducer';
 import { compose } from 'redux';
+import { receiveLogo, receiveHeading, receiveLoginText } from '../../redux/selectors/header-selectors';
+import { receiveIsAuth, receiveLogin } from '../../redux/selectors/auth-selectors';
 
 class  HeaderContainer extends React.Component {    
     render () {
@@ -14,12 +16,12 @@ class  HeaderContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        logo: state.headerPage.logo,
-        heading: state.headerPage.heading,
-        loginText: state.headerPage.loginText,
-        isAuth: state.auth.isAuth,
-        login: state.auth.login
+        logo: receiveLogo(state),
+        heading: receiveHeading(state),
+        loginText: receiveLoginText(state),
+        isAuth: receiveIsAuth(state),
+        login: receiveLogin(state)
     };
 }
 
-export default compose( connect( mapStateToProps, { authMe, logoutUser } ) )( HeaderContainer );
+export default compose( connect(mapStateToProps, {authMe, logoutUser}) )( HeaderContainer );
