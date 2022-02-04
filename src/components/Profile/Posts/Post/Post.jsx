@@ -4,7 +4,7 @@ import style from './Post.module.scss';
 const Post = (props) => {
     return (    
         <section className={style.post}>
-            <img src={props.post.avatar} alt="" />
+            <img src={props.post.avatarUrl} alt="" />
             <div className={style.text}>
                 <h4>{props.post.theme}</h4>
                 <p>{props.post.text}</p>

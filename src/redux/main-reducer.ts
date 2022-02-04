@@ -1,11 +1,12 @@
-// initialState
+import { AboutMeType, SkillsType, WorksType, ItemSkillType } from '../types/types';
+
 const intialState = {
     message: 'Main',
     about: {
         heading: 'About me',
-        image: '/img/avatar.jpg',
+        imageUrl: '/img/avatar.jpg',
         text: 'About me text'
-    },
+    } as AboutMeType,
     skills: {
         heading: 'My skills',
         items: [
@@ -14,18 +15,18 @@ const intialState = {
             {id: 3, item: 'TypeScript'},
             {id: 4, item: 'React/Redux'},
             {id: 5, item: 'Node.js'}
-        ]
-    },
+        ] as Array<ItemSkillType>
+    } as SkillsType,
     works: {
         heading: 'My works',
         preview: 'Preview',
         desc: 'Description',
         ref: 'More...'
-    }
+    } as WorksType
 };
+type InitialStateType = typeof intialState;
 
-// reducer
-const mainReducer = (state=intialState, action) => {
+const mainReducer = (state=intialState, action: MainReducerActionType): InitialStateType => {
     switch (action.type) {
         default:
             return state;
@@ -33,7 +34,7 @@ const mainReducer = (state=intialState, action) => {
 }
 
 // actionCreators
-
+type MainReducerActionType = any
 
 
 export default mainReducer;

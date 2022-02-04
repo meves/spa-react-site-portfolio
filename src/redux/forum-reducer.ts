@@ -1,4 +1,5 @@
-import { forumConst } from "./constants/constants"; 
+import { ADD_NEW_MESSAGE } from "./constants/constants"; 
+import { MessageType, MessageForumType } from '../types/types';
 
 const initialState = {
     messages: [
@@ -7,12 +8,13 @@ const initialState = {
         {id: 3, avatarUrl: '/img/avatar.jpg', name: 'Andrew', theme: 'auto', message: 'It is athe best car'},
         {id: 4, avatarUrl: '/img/avatar.jpg', name: 'Oleg', theme: 'auto', message: 'Ferrary is Dynamic!'},
         {id: 5, avatarUrl: '/img/avatar.jpg', name: 'Olga', theme: 'tattoo', message: 'My expirience is good'}
-    ]
+    ] as Array<MessageType>
 };
+type InitialStateType = typeof initialState;
 
-const forumReducer = (state=initialState, action) => {
+const forumReducer = (state=initialState, action: ForumReducerActionType): InitialStateType => {
     switch (action.type) {
-        case forumConst.ADD_NEW_MESSAGE:
+        case ADD_NEW_MESSAGE:
             return {
                 ...state,
                 messages: [...state.messages, {id: state.messages.length, avatarUrl: '/img/avatar.jpg', ...action.message}]
@@ -23,9 +25,15 @@ const forumReducer = (state=initialState, action) => {
 }
 
 // action creators
-export const addNewMessage = (message) => {
+type ForumReducerActionType = AddNewMessageActionType
+
+type AddNewMessageActionType = {
+    type: typeof ADD_NEW_MESSAGE
+    message: MessageForumType
+}
+export const addNewMessage = (message: MessageForumType): AddNewMessageActionType => {
     return {
-        type: forumConst.ADD_NEW_MESSAGE,
+        type: ADD_NEW_MESSAGE,
         message
     }
 }

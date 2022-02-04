@@ -4,8 +4,9 @@ const initialState = {
     email: 'meves.sergey@gmail.com',
     tel: '8-918-253-8109'
 };
+type InitialStateType = typeof initialState;
 
-const footerReducer = (state=initialState, action) => {
+const footerReducer = (state=initialState, action: any): InitialStateType => {
     switch (action.type) {
         default: 
             return state;
