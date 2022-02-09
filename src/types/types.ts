@@ -74,3 +74,14 @@ export type UserType = {
     photos: PhotosType
     followed: boolean
 }
+export type AuthorInfoType = {
+    author: string
+    date: string
+    email: string
+    tel: string
+}
+export type FormDataMessageType = {
+    name: string
+    theme: string
+    message: string
+}

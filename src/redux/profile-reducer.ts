@@ -21,8 +21,7 @@ type InitialStateType = typeof initialState
 export const profileReducer = (state=initialState, action: ProfilereducerActionType): InitialStateType => {
     switch(action.type) { 
         case ADD_NEW_POST: 
-            let lastIndex = state.myPost.posts.length - 1;
-            let id = state.myPost.posts[lastIndex].id + 1;
+            let id = state.myPost.posts.length + 1;
             return {
                 ...state,                                                
                 myPost: {...state.myPost,
@@ -71,7 +70,7 @@ export const profileReducer = (state=initialState, action: ProfilereducerActionT
 type ProfilereducerActionType = AddNewPostActionType | DeletePostActionType | SetUserProfileActionType
         | SetUserStatusActionType | SavePhotosActionType;
 
-type AddNewPostActionType = {
+export type AddNewPostActionType = {
     type: typeof ADD_NEW_POST
     theme: string
     text: string
