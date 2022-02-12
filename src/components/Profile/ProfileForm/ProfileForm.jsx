@@ -25,9 +25,9 @@ const ProfileForm = props => {
             </fieldset>            
             <fieldset>
                 <legend>Contacts: </legend>
-                {Object.keys(props.contacts).map(key => 
+                {/* {Object.keys(props.contacts).map(key => 
                     <Field component={Input} name={`contacts.${key}`} type="text" label={key} placeholder={key} key={key}/>    
-                )}
+                )} */}
             </fieldset>
         </form>
     )

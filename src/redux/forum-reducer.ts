@@ -12,7 +12,7 @@ const initialState = {
 };
 type InitialStateType = typeof initialState;
 
-const forumReducer = (state=initialState, action: ForumReducerActionType): InitialStateType => {
+const forumReducer = (state=initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case ADD_NEW_MESSAGE:
             return {
@@ -25,7 +25,7 @@ const forumReducer = (state=initialState, action: ForumReducerActionType): Initi
 }
 
 // action creators
-type ForumReducerActionType = AddNewMessageActionType
+type ActionsTypes = AddNewMessageActionType
 
 type AddNewMessageActionType = {
     type: typeof ADD_NEW_MESSAGE

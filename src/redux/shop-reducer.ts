@@ -3,7 +3,7 @@ const initialState = {
 };
 type InitialStateType = typeof initialState
 
-const shopReducer = (state=initialState, action: ShopreducerActionType): InitialStateType => {
+const shopReducer = (state=initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         default:
             return state;
@@ -11,6 +11,10 @@ const shopReducer = (state=initialState, action: ShopreducerActionType): Initial
 }
 
 // action creators
-type ShopreducerActionType = any
+type ActionsTypes = SomeActionType;
+
+type SomeActionType = {
+    type: string
+}
 
 export default shopReducer;

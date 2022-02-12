@@ -12,7 +12,7 @@ const initialState = {
 };
 type InitialStateType = typeof initialState
 
-const navbarReducer = (state=initialState, action: NavbarReducerActionType): InitialStateType => {
+const navbarReducer = (state=initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         default:
             return state;
@@ -20,6 +20,10 @@ const navbarReducer = (state=initialState, action: NavbarReducerActionType): Ini
 }
 
 // action creators
-type NavbarReducerActionType = any
+type ActionsTypes = SomeActionType;
+
+type SomeActionType = {
+    type: string
+}
 
 export default navbarReducer;

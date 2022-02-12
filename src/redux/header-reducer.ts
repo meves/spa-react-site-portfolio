@@ -5,13 +5,17 @@ const initialState = {
 };
 type InitialStateType = typeof initialState;
 
-const headerReducer = (state=initialState, action: HeaderReducerActionType): InitialStateType => {
+const headerReducer = (state=initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         default: 
             return state;
     }
 }
 
-type HeaderReducerActionType = any
+type ActionsTypes = SomeActionType;
+
+type SomeActionType = {
+    type: string
+}
 
 export default headerReducer; 

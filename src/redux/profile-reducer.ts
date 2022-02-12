@@ -1,8 +1,10 @@
 import { profileAPI } from "../api/api";
 import { ADD_NEW_POST, DELETE_POST, SET_USER_PROFILE, SAVE_PHOTOS, SET_USER_STATUS } from "./constants/constants";
-import { stopSubmit } from "redux-form";
+import { FormAction, stopSubmit } from "redux-form";
 import { createErrorObject } from "../utils/createErrorObject/createErrorObject";
 import { PostType, MyPostType, ProfileType } from "../types/types";
+import { ThunkAction } from "redux-thunk";
+import { AppStateType } from "./redux-store";
 
 const initialState = {
     message: 'Profile Page',    
@@ -18,7 +20,7 @@ const initialState = {
 };
 type InitialStateType = typeof initialState
 
-export const profileReducer = (state=initialState, action: ProfilereducerActionType): InitialStateType => {
+export const profileReducer = (state=initialState, action: ActionsTypes): InitialStateType => {
     switch(action.type) { 
         case ADD_NEW_POST: 
             let id = state.myPost.posts.length + 1;
@@ -67,7 +69,7 @@ export const profileReducer = (state=initialState, action: ProfilereducerActionT
 }
 
 // action creators
-type ProfilereducerActionType = AddNewPostActionType | DeletePostActionType | SetUserProfileActionType
+type ActionsTypes = AddNewPostActionType | DeletePostActionType | SetUserProfileActionType
         | SetUserStatusActionType | SavePhotosActionType;
 
 export type AddNewPostActionType = {
@@ -118,39 +120,47 @@ const savePhotos = (photos: any): SavePhotosActionType => ({
 })
 
 // thunk creators
-export const getUserProfile = (userId: number) => async (dispatch: any) => {
-    const data = await profileAPI.getUserProfile(userId); 
-    dispatch(setUserProfile(data));
-}
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>;
 
-export const getUserStatus = (userId: number) => async (dispatch: any) => {
-    const status = await profileAPI.getUserStatus(userId);
-    dispatch(setUserStatus(status));        
-}
-
-export const updateUserStatus = (status: string) => async (dispatch: any) => {
-    const data = await profileAPI.updateUserStatus(status);
-    if (data.resultCode === 0) {
-        dispatch(setUserStatus(status));
+export const getUserProfile = (userId: number): ThunkType => 
+    async (dispatch) => {
+        const data = await profileAPI.getUserProfile(userId); 
+        dispatch(setUserProfile(data));
     }
-}
 
-export const loadFile = (photoFile: any) => async (dispatch: any) => {
-    const data = await profileAPI.loadFile(photoFile);
-    if (data.resultCode === 0) {
-        dispatch(savePhotos(data.data.photos));
+export const getUserStatus = (userId: number): ThunkType => 
+    async (dispatch) => {
+        const status = await profileAPI.getUserStatus(userId);
+        dispatch(setUserStatus(status));        
     }
-}
 
-export const saveProfileData = (profile: ProfileType) => async (dispatch: any) => {
-    const data = await profileAPI.saveProfile(profile);
-    if (data.resultCode === 0) {
-        dispatch(getUserProfile(profile.userId));
-        return false;
-    } else {        
-        dispatch(stopSubmit('profileForm', createErrorObject(data) ));
-        return true;
+export const updateUserStatus = (status: string): ThunkType => 
+    async (dispatch) => {
+        const data = await profileAPI.updateUserStatus(status);
+        if (data.resultCode === 0) {
+            dispatch(setUserStatus(status));
+        }
     }
-}
+
+export const loadFile = (photoFile: any): ThunkType => 
+    async (dispatch) => {
+        const data = await profileAPI.loadFile(photoFile);
+        if (data.resultCode === 0) {
+            dispatch(savePhotos(data.data.photos));
+        }
+    }
+
+type SaveProfileDataThunkType = ThunkAction<Promise<boolean>, AppStateType, unknown, ActionsTypes | FormAction>;
+export const saveProfileData = (profile: ProfileType): SaveProfileDataThunkType => 
+    async (dispatch) => {
+        const data = await profileAPI.saveProfile(profile);
+        if (data.resultCode === 0) {
+            dispatch(getUserProfile(profile.userId));
+            return false;
+        } else {        
+            dispatch(stopSubmit('profileForm', createErrorObject(data) ));
+            return true;
+        }
+    }
 
 export default profileReducer;

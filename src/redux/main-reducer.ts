@@ -26,7 +26,7 @@ const intialState = {
 };
 type InitialStateType = typeof intialState;
 
-const mainReducer = (state=intialState, action: MainReducerActionType): InitialStateType => {
+const mainReducer = (state=intialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         default:
             return state;
@@ -34,7 +34,10 @@ const mainReducer = (state=intialState, action: MainReducerActionType): InitialS
 }
 
 // actionCreators
-type MainReducerActionType = any
+type ActionsTypes = SomeActionType;
 
+type SomeActionType = {
+    type: string
+}
 
 export default mainReducer;
