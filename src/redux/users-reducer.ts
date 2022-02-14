@@ -5,6 +5,7 @@ import { UserType } from "../types/types";
 import { ThunkAction } from "redux-thunk";
 import { AppStateType } from "./redux-store";
 import { Dispatch } from "redux";
+import { ResponseDataGetUsersType, ResponseDataEmptyType } from "../types/apiTypes";
 export const URL = '/img/avatar_2.png';
 
 const initialState = {
@@ -167,7 +168,7 @@ export const getUsers = (currentPage: number, count: number): ThunkType =>
     async (dispatch: any) => {
         dispatch(setIsFetching(true));
         /**this request sended once after component was mounted */
-        const data = await usersAPI.getUsers(currentPage, count);
+        const data: ResponseDataGetUsersType = await usersAPI.getUsers(currentPage, count);
         dispatch(setIsFetching(false));
         dispatch(loadUsers(data.items));
         dispatch(getTotalCount(data.totalCount));
@@ -178,18 +179,19 @@ export const getCurrentPageUsers = (currentPage: number, count: number): ThunkTy
         dispatch(setCurrentPage(currentPage));
         dispatch(setIsFetching(true));
         /**this request sended when user has changed current page */
-        const data = await usersAPI.getUsers(currentPage, count);
+        const data: ResponseDataGetUsersType = await usersAPI.getUsers(currentPage, count);
         dispatch(resetUsers(data.items));
         dispatch(setIsFetching(false));    
     }
     
 type DispatchType = Dispatch<ActionsTypes>;
 type ActionCreatorsType = ((id: number) => FollowUserType) | ((id: number) => UnfollowUserType);
+type MethodApiType = (userId: number) => Promise<ResponseDataEmptyType>;
 
-const followUnfollow = async (dispatch: DispatchType, userId: number, methodAPI: any, actionCreator: ActionCreatorsType)
+const followUnfollow = async (dispatch: DispatchType, userId: number, methodAPI: MethodApiType, actionCreator: ActionCreatorsType)
 : Promise<void> => {
     dispatch(toggleFollowingProgress(true, userId));
-    const data = await methodAPI(userId); 
+    const data: ResponseDataEmptyType = await methodAPI(userId); 
     if (data.resultCode === 0) {
         dispatch(actionCreator(userId)); 
     }

@@ -5,6 +5,7 @@ import { createErrorObject } from "../utils/createErrorObject/createErrorObject"
 import { PostType, MyPostType, ProfileType } from "../types/types";
 import { ThunkAction } from "redux-thunk";
 import { AppStateType } from "./redux-store";
+import { ResponseDataEmptyType, ResponseDataLoadFileType } from "../types/apiTypes";
 
 const initialState = {
     message: 'Profile Page',    
@@ -124,19 +125,19 @@ type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
 
 export const getUserProfile = (userId: number): ThunkType => 
     async (dispatch) => {
-        const data = await profileAPI.getUserProfile(userId); 
+        const data: ProfileType = await profileAPI.getUserProfile(userId); 
         dispatch(setUserProfile(data));
     }
 
 export const getUserStatus = (userId: number): ThunkType => 
     async (dispatch) => {
-        const status = await profileAPI.getUserStatus(userId);
+        const status: string = await profileAPI.getUserStatus(userId);
         dispatch(setUserStatus(status));        
     }
 
 export const updateUserStatus = (status: string): ThunkType => 
     async (dispatch) => {
-        const data = await profileAPI.updateUserStatus(status);
+        const data: ResponseDataEmptyType = await profileAPI.updateUserStatus(status);
         if (data.resultCode === 0) {
             dispatch(setUserStatus(status));
         }
@@ -144,7 +145,7 @@ export const updateUserStatus = (status: string): ThunkType =>
 
 export const loadFile = (photoFile: any): ThunkType => 
     async (dispatch) => {
-        const data = await profileAPI.loadFile(photoFile);
+        const data: ResponseDataLoadFileType = await profileAPI.loadFile(photoFile);
         if (data.resultCode === 0) {
             dispatch(savePhotos(data.data.photos));
         }
@@ -153,7 +154,7 @@ export const loadFile = (photoFile: any): ThunkType =>
 type SaveProfileDataThunkType = ThunkAction<Promise<boolean>, AppStateType, unknown, ActionsTypes | FormAction>;
 export const saveProfileData = (profile: ProfileType): SaveProfileDataThunkType => 
     async (dispatch) => {
-        const data = await profileAPI.saveProfile(profile);
+        const data: ResponseDataEmptyType = await profileAPI.saveProfile(profile);
         if (data.resultCode === 0) {
             dispatch(getUserProfile(profile.userId));
             return false;
