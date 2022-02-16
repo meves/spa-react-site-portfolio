@@ -1,17 +1,13 @@
-const initialState = {};
+import { ActionsTypes } from "./redux-store";
+
+const initialState = { };
 type InitialStateType = typeof initialState;
 
-const contactsReducer = (state=initialState, action: ActionsTypes): InitialStateType => {
+const contactsReducer = (state=initialState, action: ActionsTypes<any>): InitialStateType => {
     switch (action.type) {
         default:
             return state;
     }
-}
-
-type ActionsTypes = SomeActionType;
-
-type SomeActionType = {
-    type: string
 }
 
 export default contactsReducer;

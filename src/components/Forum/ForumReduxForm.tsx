@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { FC } from 'react';
 import style from './Forum.module.scss';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, InjectedFormProps } from 'redux-form';
 import { required, minLength2, maxLength15 } from '../../utils/validators/validators';
 import { Input, Textarea } from '../common/FormsControls/FormsControls';
 
-const ForumForm = (props) => {
+export type FormDataType = {
+    name: string
+    theme: string
+    message: string
+}
+
+const ForumForm: FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <form className={style.form} onSubmit={props.handleSubmit}>
             <fieldset className={style.fieldset}>
@@ -21,4 +27,4 @@ const ForumForm = (props) => {
     );
 }
 
-export default reduxForm({form: 'addMessageForm'})(ForumForm);
+export default reduxForm<FormDataType>({form: 'addMessageForm'})(ForumForm);

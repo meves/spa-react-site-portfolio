@@ -1,4 +1,5 @@
 import { NavbarTitleType } from "../types/types";
+import { ActionsTypes } from "./redux-store";
 
 const initialState = {
     titles: [
@@ -12,18 +13,11 @@ const initialState = {
 };
 type InitialStateType = typeof initialState
 
-const navbarReducer = (state=initialState, action: ActionsTypes): InitialStateType => {
+const navbarReducer = (state=initialState, action: ActionsTypes<any>): InitialStateType => {
     switch (action.type) {
         default:
             return state;
     }
-}
-
-// action creators
-type ActionsTypes = SomeActionType;
-
-type SomeActionType = {
-    type: string
 }
 
 export default navbarReducer;

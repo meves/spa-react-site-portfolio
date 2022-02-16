@@ -1,10 +1,14 @@
-import React from "react";
-import { Field, reduxForm } from "redux-form";
+import React, { FC } from "react";
+import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import { Textarea } from "../../common/FormsControls/FormsControls";
 import { required, maxLength30 } from "../../../utils/validators/validators";
          
-const AddPostForm = (props) => {
-          
+export type FormDataType = {
+    theme: string
+    text: string
+}
+
+const AddPostForm: FC<InjectedFormProps<FormDataType>> = (props) => {          
     return (
         <form onSubmit={props.handleSubmit}>
             <Field  component={Textarea}
@@ -24,4 +28,4 @@ const AddPostForm = (props) => {
     );
 }
 
-export default reduxForm({form: 'addPostForm'})(AddPostForm);
+export default reduxForm<FormDataType>({form: 'addPostForm'})(AddPostForm);

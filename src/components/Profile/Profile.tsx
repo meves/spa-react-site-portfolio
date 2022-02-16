@@ -24,8 +24,8 @@ const Profile: FC<PropsType> = (props): JSX.Element => {
     const switchOnEditMode = (editMode: boolean) => {
         setEditMode(editMode);
     }
-    const onSubmit = (formData: any) => {
-        formData.userId = props.authId;
+    const onSubmit = (formData: ProfileType) => {
+        formData.userId = Number(props.authId);
         props.saveProfileData(formData)
             .then((result: boolean) => {
                 setEditMode(result);
@@ -38,8 +38,8 @@ const Profile: FC<PropsType> = (props): JSX.Element => {
                     <ProfileStatus updateUserStatus={props.updateUserStatus} status={props.status} />
                     {editMode  
                     ? <ProfileForm onSubmit={onSubmit} 
-                                 //switchOnEditMode={switchOnEditMode} 
-                                 //contacts={props.profile.contacts}
+                                   switchOnEditMode={switchOnEditMode} 
+                                   contacts={props.profile.contacts}
                                    initialValues={props.profile}/>  
                     : <ProfileData profile={props.profile} loadFile={props.loadFile} message={props.message} 
                                    isOwner={props.isOwner} switchOnEditMode={switchOnEditMode} />

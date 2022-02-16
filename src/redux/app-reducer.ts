@@ -1,8 +1,6 @@
-import { Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { authMe } from "./auth-reducer";
-import { INIT_SUCCESS } from "./constants/constants";
-import { AppStateType } from "./redux-store";
+import { AppStateType, ActionsTypes } from "./redux-store";
 
 const initialState = {
     initialized: false,
@@ -10,31 +8,28 @@ const initialState = {
 };
 type InitialStateType = typeof initialState;
 
-const appReducer = (state=initialState, action: ActionsTypes): InitialStateType => {
+const appReducer = (state=initialState, action: ActionsTypes<ActionType>): InitialStateType => {
     switch (action.type) {
-        case INIT_SUCCESS:
+        case "site-portfolio/medvedkinsergey.ru/app/INIT_SUCCES":
             return {
                 ...state,
                 initialized: true,
                 isFetching: false
             }
         default: 
-            return state;
+        return state;
     }
 };
 
-// action creator
-type ActionsTypes = SetInitSuccessActionType;
-
-type SetInitSuccessActionType = {
-    type: typeof INIT_SUCCESS
+const action = {
+    setInitSuccess: () => ({
+        type: 'site-portfolio/medvedkinsergey.ru/app/INIT_SUCCES'
+    } as const)
 }
-export const setInitSuccess = (): SetInitSuccessActionType => ({
-    type: INIT_SUCCESS
-})
+type ActionType = typeof action;
 
-// thunk creator 
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>;
+// thunk 
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes<ActionType>>;
 
 export const initializeApp = (): ThunkType => 
     async (dispatch) => {
@@ -43,7 +38,7 @@ export const initializeApp = (): ThunkType =>
         // get color scheme
         // get language
         Promise.all(promises).then( () => {
-            dispatch(setInitSuccess());
+            dispatch(action.setInitSuccess());
         } );
     }
 

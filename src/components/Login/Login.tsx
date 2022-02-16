@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import LoginReduxForm from './LoginForm';
+import LoginReduxForm, { FormDataType } from './LoginForm';
 import { connect } from 'react-redux';
 import { loginUser } from '../../redux/auth-reducer';
 import { Redirect } from 'react-router-dom';
@@ -13,7 +13,7 @@ type PropsType = {
 }
 
 const Login: FC<PropsType> = (props): JSX.Element => {
-    const login = (values: any) => {
+    const login = (values: FormDataType) => {
         const {email, password, rememberMe, captcha} = values;
         props.loginUser(email, password, rememberMe, captcha);
     }
@@ -24,7 +24,7 @@ const Login: FC<PropsType> = (props): JSX.Element => {
         <div>
             <h1>Login</h1>
             <LoginReduxForm onSubmit={login} 
-                        //  captchaUrl={props.captchaUrl}
+                            captchaUrl={props.captchaUrl}
             />        
         </div>
     );

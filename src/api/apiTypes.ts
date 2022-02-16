@@ -1,4 +1,4 @@
-import { PhotosType, UserType } from './types';
+import { PhotosType, UserType } from '../types/types';
 
 export type ResponseDataGetUsersType = {
     items: Array<UserType>

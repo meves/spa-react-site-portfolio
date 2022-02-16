@@ -1,3 +1,5 @@
+import { ActionsTypes } from "./redux-store";
+
 const initialState = {
     logo: 'см',
     heading: 'Web Development on React JS',
@@ -5,17 +7,11 @@ const initialState = {
 };
 type InitialStateType = typeof initialState;
 
-const headerReducer = (state=initialState, action: ActionsTypes): InitialStateType => {
+const headerReducer = (state=initialState, action: ActionsTypes<any>): InitialStateType => {
     switch (action.type) {
         default: 
             return state;
     }
-}
-
-type ActionsTypes = SomeActionType;
-
-type SomeActionType = {
-    type: string
 }
 
 export default headerReducer; 

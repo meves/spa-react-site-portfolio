@@ -1,9 +1,20 @@
-import React from 'react';
-import { reduxForm, Field } from 'redux-form';
+import React, { FC } from 'react';
+import { reduxForm, Field, InjectedFormProps } from 'redux-form';
 import { required, email, minLength8 } from '../../utils/validators/validators';
 import { Input, Checkbox } from '../common/FormsControls/FormsControls';
 
-const LoginForm = (props) => {
+export type FormDataType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha: boolean | undefined
+} 
+
+type PropsType = {
+    captchaUrl: string | null
+}
+
+const LoginForm: FC<InjectedFormProps<FormDataType, PropsType> & PropsType> = (props) => {
     const { handleSubmit } = props;
     return (
         <form onSubmit={ handleSubmit }>
@@ -32,4 +43,4 @@ const LoginForm = (props) => {
     );
 }
 
-export default reduxForm({ form: 'login' })(LoginForm);
+export default reduxForm<FormDataType, PropsType>({ form: 'login' })(LoginForm);

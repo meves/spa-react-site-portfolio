@@ -32,6 +32,9 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export type AppStateType = ReturnType<typeof store.getState>;
 
+type PropertiesTypes<T> = T extends {[key: string]: infer U} ? U : "never";
+export type ActionsTypes<T extends {[key: string]: (...args: any[]) => any}> = ReturnType<PropertiesTypes<T>>;
+
 // @ts-ignore
 window.store = store;
 

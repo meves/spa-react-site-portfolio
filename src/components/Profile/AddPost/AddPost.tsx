@@ -1,16 +1,15 @@
 import React, { FC } from "react";
 import { connect } from 'react-redux';
-import { addNewPost } from "../../../redux/profile-reducer";
+import { action, AddNewPostActionType } from "../../../redux/profile-reducer";
 import { AppStateType } from "../../../redux/redux-store";
-import AddPostReduxForm from './AddPostForm';
-import { AddNewPostActionType } from "../../../redux/profile-reducer";
+import AddPostReduxForm, { FormDataType } from './AddPostForm';
 
 type PropsType = {
     addNewPost: (theme: string, text: string) => AddNewPostActionType
 }
 
 const AddPost: FC<PropsType> = (props): JSX.Element => {
-    const onHandleClickButton = (values: any) => {
+    const onHandleClickButton = (values: FormDataType) => {
         const { theme, text } = values;
         props.addNewPost(theme, text);
     };        
@@ -18,7 +17,7 @@ const AddPost: FC<PropsType> = (props): JSX.Element => {
     return (
         <section className="addPost">
             <h3>Add new post</h3>
-            <AddPostReduxForm onSubmit={onHandleClickButton} {...props}/>
+            <AddPostReduxForm onSubmit={onHandleClickButton}/>
         </section>
     );
 };
@@ -26,5 +25,7 @@ const AddPost: FC<PropsType> = (props): JSX.Element => {
 type MapDispatchPropsType = {
     addNewPost: (theme: string, text: string) => AddNewPostActionType
 }
+
+const { addNewPost } = action;
 
 export default connect<{}, MapDispatchPropsType, {}, AppStateType>(null, { addNewPost })(AddPost);

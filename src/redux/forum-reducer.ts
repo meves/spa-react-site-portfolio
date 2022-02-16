@@ -1,5 +1,5 @@
-import { ADD_NEW_MESSAGE } from "./constants/constants"; 
 import { MessageType, MessageForumType } from '../types/types';
+import { ActionsTypes } from './redux-store';
 
 const initialState = {
     messages: [
@@ -12,30 +12,23 @@ const initialState = {
 };
 type InitialStateType = typeof initialState;
 
-const forumReducer = (state=initialState, action: ActionsTypes): InitialStateType => {
+const forumReducer = (state=initialState, action: ActionsTypes<ActionType>): InitialStateType => {
     switch (action.type) {
-        case ADD_NEW_MESSAGE:
+        case 'site-portfolio/medvedkinsergey.ru/forum/ADD_NEW_MESSAGE':
             return {
                 ...state,
                 messages: [...state.messages, {id: state.messages.length, avatarUrl: '/img/avatar.jpg', ...action.message}]
             }
-        default:
+            default:
             return state;
     }
 }
 
-// action creators
-type ActionsTypes = AddNewMessageActionType
-
-type AddNewMessageActionType = {
-    type: typeof ADD_NEW_MESSAGE
-    message: MessageForumType
+export const action = {
+    addNewMessage: (message: MessageForumType) => ({
+        type: 'site-portfolio/medvedkinsergey.ru/forum/ADD_NEW_MESSAGE', message
+    } as const)
 }
-export const addNewMessage = (message: MessageForumType): AddNewMessageActionType => {
-    return {
-        type: ADD_NEW_MESSAGE,
-        message
-    }
-}
+type ActionType = typeof action;
 
 export default forumReducer;

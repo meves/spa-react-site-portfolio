@@ -1,11 +1,16 @@
-import React from 'react';
-import { reduxForm, Field } from 'redux-form';
+import React, { FC } from 'react';
+import { reduxForm, Field, InjectedFormProps } from 'redux-form';
 import { Input, Checkbox, Textarea } from '../../common/FormsControls/FormsControls';
 import { required } from '../../../utils/validators/validators';
 import styles from '../../common/FormsControls/FormsControls.module.scss';
-import { compose } from 'redux';
+import { ContactsType, ProfileType } from '../../../types/types';
 
-const ProfileForm = props => {
+type OwnPropsType = {
+    switchOnEditMode: (editMode: boolean) => void 
+    contacts: ContactsType
+}
+
+const ProfileForm: FC<InjectedFormProps<ProfileType, OwnPropsType> & OwnPropsType> = props => {
     const handleClick = () => {
         props.switchOnEditMode(false);
     }
@@ -25,12 +30,12 @@ const ProfileForm = props => {
             </fieldset>            
             <fieldset>
                 <legend>Contacts: </legend>
-                {/* {Object.keys(props.contacts).map(key => 
+                {Object.keys(props.contacts).map(key => 
                     <Field component={Input} name={`contacts.${key}`} type="text" label={key} placeholder={key} key={key}/>    
-                )} */}
+                )}
             </fieldset>
         </form>
     )
 }
 
-export default compose( reduxForm({form: 'profileForm'}) )(ProfileForm);
+export default reduxForm<ProfileType, OwnPropsType>({form: 'profileForm'})(ProfileForm);

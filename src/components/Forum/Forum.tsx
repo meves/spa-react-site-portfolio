@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { MessageType, FormDataMessageType } from '../../types/types';
 import style from './Forum.module.scss';
-import ForumReduxForm from './ForumReduxForm';
+import ForumReduxForm, { FormDataType } from './ForumReduxForm';
 
 type PropsType = {
     messages: Array<MessageType>
@@ -23,7 +23,7 @@ const Forum: FC<PropsType> = (props): JSX.Element => {
                 </div>
     });
 
-    const onAddMessage = (values: any) => {
+    const onAddMessage = (values: FormDataType) => {
         const { name, theme, message} = values;
         props.addNewMessage({name, theme, message}); 
     }

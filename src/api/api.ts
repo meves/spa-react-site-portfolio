@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { ResponseDataAuthMeType, ResponseDataEmptyType, ResponseDataGetCaptchaType, ResponseDataGetUsersType, ResponseDataLoadFileType, ResponseDataLoginType } from '../types/apiTypes';
+import { ResponseDataAuthMeType, ResponseDataEmptyType, ResponseDataGetCaptchaType, 
+         ResponseDataGetUsersType, ResponseDataLoadFileType, ResponseDataLoginType } from './apiTypes';
 import { ProfileType } from '../types/types';
 
 const ax = axios.create({
