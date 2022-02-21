@@ -1,5 +1,4 @@
 import { AuthorInfoType } from "../types/types";
-import { ActionsTypes } from "./redux-store";
 
 const initialState = {
     authorInfo: {
@@ -11,7 +10,7 @@ const initialState = {
 };
 type InitialStateType = typeof initialState;
 
-const footerReducer = (state=initialState, action: ActionsTypes<any>): InitialStateType => {
+const footerReducer = (state=initialState, action: any): InitialStateType => {
     switch (action.type) {
         default: 
             return state;

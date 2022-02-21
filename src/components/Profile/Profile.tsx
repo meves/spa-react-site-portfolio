@@ -16,7 +16,7 @@ type PropsType = {
     isOwner: boolean  // ->
     saveProfileData: (profile: ProfileType) => Promise<boolean>  // !
     updateUserStatus: (status: string) => void  // ->
-    loadFile: (photoFile: any) => void  // ->
+    loadFile: (photoFile: File) => void  // ->
 }
 
 const Profile: FC<PropsType> = (props): JSX.Element => {

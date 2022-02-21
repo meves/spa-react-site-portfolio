@@ -1,13 +1,8 @@
-import profileReducer, { addNewPost, deletePost } from "./profile-reducer";
+import profileReducer, { actions, initialState } from "./profile-reducer";
 
-const state = {
-    myPost: {
-        posts: [
-            {id: 1, avatar: '/img/avatar.jpg', theme: 'Mountains', text: 'Text about mountains', date: '01.09.2021'},
-            {id: 2, avatar: '/img/avatar.jpg', theme: 'Rivers', text: 'Text about rivers', date: '02.09.2021'}
-        ]
-    }
-};
+const { addNewPost, deletePost } = actions;
+const state = initialState;
+
 it('new post should be added', () => {
     const action = addNewPost('theme', 'text');
     const newState = profileReducer(state, action);
@@ -15,7 +10,7 @@ it('new post should be added', () => {
 });
 it('new post should be correct', () => {
     const action = addNewPost('theme', 'text');
-    const newPost = {id: 3, avatar: '/img/avatar.jpg', theme: 'theme', text: 'text', date: new Date().toLocaleDateString()};
+    const newPost = {id: 3, avatarUrl: '/img/avatar.jpg', theme: 'theme', text: 'text', date: new Date().toLocaleDateString()};
     const newState = profileReducer(state, action);
     expect(newState.myPost.posts[2]).toEqual(newPost);
 });

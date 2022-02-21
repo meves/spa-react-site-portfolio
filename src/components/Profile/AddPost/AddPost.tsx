@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { connect } from 'react-redux';
-import { action, AddNewPostActionType } from "../../../redux/profile-reducer";
+import { actions, AddNewPostActionType } from "../../../redux/profile-reducer";
 import { AppStateType } from "../../../redux/redux-store";
 import AddPostReduxForm, { FormDataType } from './AddPostForm';
 
@@ -26,6 +26,6 @@ type MapDispatchPropsType = {
     addNewPost: (theme: string, text: string) => AddNewPostActionType
 }
 
-const { addNewPost } = action;
+const { addNewPost } = actions;
 
 export default connect<{}, MapDispatchPropsType, {}, AppStateType>(null, { addNewPost })(AddPost);

@@ -2,7 +2,7 @@ import Forum from "./Forum";
 import { connect } from "react-redux";
 import { withAuthRedirect } from "../../hoc/withAithRedirect";
 import { compose } from 'redux';
-import { action } from "../../redux/forum-reducer";
+import { actions } from "../../redux/forum-reducer";
 import { receiveMessages } from "../../redux/selectors/forum-selectors";
 import { MessageType } from "../../types/types";
 import { AppStateType } from "../../redux/redux-store";
@@ -17,7 +17,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     };
 }
 
-const { addNewMessage } = action;
+const { addNewMessage } = actions;
 
 export default compose( 
     connect<MapStatePropsType, {}, {}, AppStateType>(mapStateToProps, { addNewMessage }), 

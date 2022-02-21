@@ -1,5 +1,5 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import { createStore, combineReducers, applyMiddleware, Action } from 'redux';
+import thunk, { ThunkAction } from 'redux-thunk';
 import headerReducer from './header-reducer';
 import navbarReducer from './navbar-reducer';    
 import mainReducer from './main-reducer';
@@ -32,8 +32,10 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export type AppStateType = ReturnType<typeof store.getState>;
 
-type PropertiesTypes<T> = T extends {[key: string]: infer U} ? U : "never";
-export type ActionsTypes<T extends {[key: string]: (...args: any[]) => any}> = ReturnType<PropertiesTypes<T>>;
+export type InferActionsTypes<T> = T extends { [ key : string ]  :  ( ...args : any [] ) => infer U } ? U : "never";
+
+export type CommonThunkType<A extends Action<any>, R=Promise<void>> = ThunkAction<R, AppStateType, unknown, A>;
+
 
 // @ts-ignore
 window.store = store;

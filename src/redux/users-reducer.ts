@@ -1,10 +1,11 @@
-import { usersAPI, followAPI } from "../api/api";
+import { followAPI } from "../api/follow-api";
+import { usersAPI } from "../api/users-api";
 import { UserType } from "../types/types";         
-import { ThunkAction } from "redux-thunk";
-import { ActionsTypes, AppStateType } from "./redux-store";
-import { Dispatch } from "redux";
-import { ResponseDataGetUsersType, ResponseDataEmptyType } from "../api/apiTypes";
+import { ThunkDispatch } from "redux-thunk";
+import { InferActionsTypes, AppStateType, CommonThunkType } from "./redux-store";
 import { ResultCodes } from "../enums/responseCodes";
+import { ResponseDataType } from "../api/types";
+
 export const URL = '/img/avatar_2.png';
 
 const initialState = {
@@ -17,7 +18,9 @@ const initialState = {
 };
 type InitialStateType = typeof initialState
 
-const usersReducer = (state=initialState, action: ActionsTypes<ActionType>): InitialStateType => {
+type ActionsTypes = InferActionsTypes<typeof actions>;
+
+const usersReducer = (state=initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case "site-portfolio/medvedkinsergey.ru/users/FOLLOW_USER": 
             return {
@@ -82,7 +85,7 @@ const usersReducer = (state=initialState, action: ActionsTypes<ActionType>): Ini
     }
 }
 
-const action = {
+const actions = {
     followUser: (id: number) => ({
         type: 'site-portfolio/medvedkinsergey.ru/users/FOLLOW_USER', id
     } as const),
@@ -108,55 +111,53 @@ const action = {
         type: 'site-portfolio/medvedkinsergey.ru/users/FOLLOWING_PROGRESS', isFetching, userId
     } as const)
 }
-type ActionType = typeof action;
-type FollowUserType = ReturnType<typeof action.followUser>;
-type UnfollowUserType = ReturnType<typeof action.unfollowUser>;
-// thunk creators
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes<ActionType>>;
+
+
+type ThunkType = CommonThunkType<ActionsTypes>;
 
 export const getUsers = (currentPage: number, count: number): ThunkType => 
     async (dispatch: any) => {
-        dispatch(action.setIsFetching(true));
+        dispatch(actions.setIsFetching(true));
         /**this request sended once after component was mounted */
-        const data: ResponseDataGetUsersType = await usersAPI.getUsers(currentPage, count);
-        dispatch(action.setIsFetching(false));
-        dispatch(action.loadUsers(data.items));
-        dispatch(action.getTotalCount(data.totalCount));
+        const data = await usersAPI.getUsers(currentPage, count);
+        dispatch(actions.setIsFetching(false));
+        dispatch(actions.loadUsers(data.items));
+        dispatch(actions.getTotalCount(data.totalCount));
     }
 
 export const getCurrentPageUsers = (currentPage: number, count: number): ThunkType => 
     async (dispatch: any) => {
-        dispatch(action.setCurrentPage(currentPage));
-        dispatch(action.setIsFetching(true));
+        dispatch(actions.setCurrentPage(currentPage));
+        dispatch(actions.setIsFetching(true));
         /**this request sended when user has changed current page */
-        const data: ResponseDataGetUsersType = await usersAPI.getUsers(currentPage, count);
-        dispatch(action.resetUsers(data.items));
-        dispatch(action.setIsFetching(false));    
+        const data = await usersAPI.getUsers(currentPage, count);
+        dispatch(actions.resetUsers(data.items));
+        dispatch(actions.setIsFetching(false));    
     }
     
-type DispatchType = Dispatch<ActionsTypes<ActionType>>;
-
-type ActionCreatorsType = ((id: number) => FollowUserType) | ((id: number) => UnfollowUserType);
-type MethodApiType = (userId: number) => Promise<ResponseDataEmptyType>;
+type DispatchType = ThunkDispatch<AppStateType, unknown, ActionsTypes>;
+type MethodApiType = (userId: number) => Promise<ResponseDataType>;
+type ActionCreatorsType = ((id: number) => ReturnType<typeof actions.followUser>) 
+                        | ((id: number) => ReturnType<typeof actions.unfollowUser>);
 
 const followUnfollow = async (dispatch: DispatchType, userId: number, methodAPI: MethodApiType, actionCreator: ActionCreatorsType)
 : Promise<void> => {
-    dispatch(action.toggleFollowingProgress(true, userId));
-    const data: ResponseDataEmptyType = await methodAPI(userId); 
+    dispatch(actions.toggleFollowingProgress(true, userId));
+    const data = await methodAPI(userId); 
     if (data.resultCode === ResultCodes.Success) {
         dispatch(actionCreator(userId)); 
     }
-    dispatch(action.toggleFollowingProgress(false, userId));
+    dispatch(actions.toggleFollowingProgress(false, userId));
 }
 
 export const follow = (userId: number): ThunkType => 
-    async (dispatch: any) => {
-        followUnfollow(dispatch, userId, followAPI.followUser.bind(followAPI), action.followUser);
+    async (dispatch) => {
+        followUnfollow(dispatch, userId, followAPI.followUser.bind(followAPI), actions.followUser);
     }
 
 export const unfollow = (userId: number): ThunkType => 
-    async (dispatch: any) => {
-        followUnfollow(dispatch, userId, followAPI.unfollowUser.bind(followAPI), action.unfollowUser);
+    async (dispatch) => {
+        followUnfollow(dispatch, userId, followAPI.unfollowUser.bind(followAPI), actions.unfollowUser);
     }
 
 export default usersReducer;

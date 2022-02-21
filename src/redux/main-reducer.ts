@@ -1,5 +1,4 @@
 import { AboutMeType, SkillsType, WorksType, ItemSkillType } from '../types/types';
-import { ActionsTypes } from './redux-store';
 
 const intialState = {
     message: 'Main',
@@ -27,7 +26,7 @@ const intialState = {
 };
 type InitialStateType = typeof intialState;
 
-const mainReducer = (state=intialState, action: ActionsTypes<any>): InitialStateType => {
+const mainReducer = (state=intialState, action: any): InitialStateType => {
     switch (action.type) {
         default:
             return state;

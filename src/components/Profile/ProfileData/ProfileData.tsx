@@ -8,7 +8,7 @@ type PropsType = {
     message: string
     profile: ProfileType
     isOwner: boolean
-    loadFile: (photoFile: any) => void
+    loadFile: (photoFile: File) => void
     switchOnEditMode: (editMode: boolean) => void
 }
 

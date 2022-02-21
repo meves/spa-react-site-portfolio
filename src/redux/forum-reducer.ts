@@ -1,5 +1,5 @@
 import { MessageType, MessageForumType } from '../types/types';
-import { ActionsTypes } from './redux-store';
+import { InferActionsTypes } from './redux-store';
 
 const initialState = {
     messages: [
@@ -12,7 +12,9 @@ const initialState = {
 };
 type InitialStateType = typeof initialState;
 
-const forumReducer = (state=initialState, action: ActionsTypes<ActionType>): InitialStateType => {
+type ActionsTypes = InferActionsTypes<typeof actions>;
+
+const forumReducer = (state=initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case 'site-portfolio/medvedkinsergey.ru/forum/ADD_NEW_MESSAGE':
             return {
@@ -24,11 +26,10 @@ const forumReducer = (state=initialState, action: ActionsTypes<ActionType>): Ini
     }
 }
 
-export const action = {
+export const actions = {
     addNewMessage: (message: MessageForumType) => ({
         type: 'site-portfolio/medvedkinsergey.ru/forum/ADD_NEW_MESSAGE', message
     } as const)
 }
-type ActionType = typeof action;
 
 export default forumReducer;
