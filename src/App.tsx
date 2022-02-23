@@ -2,7 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect, Provider } from 'react-redux';
 import { Route, BrowserRouter, withRouter, Switch } from 'react-router-dom';
-import store from './redux/redux-store';
+import store, { AppStateType } from './redux/redux-store';
 import { initializeApp } from './redux/app-reducer';
 import { withSuspense } from './hoc/withSuspense';
 
@@ -20,8 +20,14 @@ const ShopContainer = React.lazy(() => import('./components/Shop/ShopContainer')
 const ContactsContainer = React.lazy(() => import('./components/Contacts/Contacts'));
 const LoginPage = React.lazy(() => import('./components/Login/Login'));
 
-class App extends React.Component {
-  catchAllUnhandledErrors = (reason, promise) => {
+type PropsType = {
+  initializeApp: () => void
+  initialized: boolean
+  isFetching: boolean
+}
+
+class App extends React.Component<PropsType> {
+  catchAllUnhandledErrors = (event: PromiseRejectionEvent) => {
     // set globalError in app-reducer through thunk-creator and action-creator 
     // then show the error in ErrorComponent
   }
@@ -57,14 +63,20 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
   initialized: state.app.initialized,
   isFetching: state.app.isFetching 
 })
+type MapDispatchPropsType = {
+  initializeApp: () => void
+}
+type MapStatePropsType = ReturnType<typeof mapStateToProps>;
 
-const AppContainer = compose(withRouter, connect(mapStateToProps, {initializeApp}))(App);
+const AppContainer = compose<React.ComponentType>(
+        withRouter, 
+        connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, { initializeApp }))(App);
 
-const MainApp = (props) => {
+const MainApp: React.FC = (props): JSX.Element => {
   return (
     <BrowserRouter>
       <Provider store={store}>

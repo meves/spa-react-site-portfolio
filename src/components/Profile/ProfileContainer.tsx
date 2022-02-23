@@ -58,7 +58,7 @@ type MapDispatchPropsType = {
     saveProfileData: (profile: ProfileType) => void
 }
 
-export default compose (
+export default compose<React.ComponentType>(
     connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>( mapStateToProps,
           { getUserProfile, getUserStatus, updateUserStatus, loadFile, saveProfileData }), 
     withRouter, 

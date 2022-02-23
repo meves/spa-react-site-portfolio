@@ -3,7 +3,7 @@ import style from './Preloader.module.scss';
 import preloader from '../../../assets/images/preloader.gif';
 
 type PropsType = {
-    isFetching: boolean
+    isFetching?: boolean
 }
 
 const Preloader: FC<PropsType> = (props): JSX.Element => {

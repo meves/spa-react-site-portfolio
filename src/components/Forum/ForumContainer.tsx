@@ -6,6 +6,7 @@ import { actions } from "../../redux/forum-reducer";
 import { receiveMessages } from "../../redux/selectors/forum-selectors";
 import { MessageType } from "../../types/types";
 import { AppStateType } from "../../redux/redux-store";
+import React from "react";
 
 type MapStatePropsType = {
     messages: Array<MessageType>
@@ -19,6 +20,6 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 
 const { addNewMessage } = actions;
 
-export default compose( 
+export default compose<React.ComponentType>( 
     connect<MapStatePropsType, {}, {}, AppStateType>(mapStateToProps, { addNewMessage }), 
     withAuthRedirect )(Forum);

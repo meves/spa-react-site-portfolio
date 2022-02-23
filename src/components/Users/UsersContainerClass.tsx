@@ -61,7 +61,7 @@ type MapDispatchPropsType = {
     getCurrentPageUsers: (currentPage: number, count: number) => void
 }
 
-export default compose( 
+export default compose<React.ComponentType>( 
     connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>
         (mapStateToProps, { follow, unfollow, getUsers, getCurrentPageUsers }),
     withAuthRedirect )(UsersContainer);
