@@ -16,11 +16,11 @@ const initialState = {
     isFetching: true,
     followingProgress: [] as Array<number>
 };
-type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState
 
 type ActionsTypes = InferActionsTypes<typeof actions>;
 
-const usersReducer = (state=initialState, action: ActionsTypes): InitialStateType => {
+export const usersReducer = (state=initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case "site-portfolio/medvedkinsergey.ru/users/FOLLOW_USER": 
             return {
@@ -85,7 +85,7 @@ const usersReducer = (state=initialState, action: ActionsTypes): InitialStateTyp
     }
 }
 
-const actions = {
+export const actions = {
     followUser: (id: number) => ({
         type: 'site-portfolio/medvedkinsergey.ru/users/FOLLOW_USER', id
     } as const),
@@ -152,12 +152,12 @@ const followUnfollow = async (dispatch: DispatchType, userId: number, methodAPI:
 
 export const follow = (userId: number): ThunkType => 
     async (dispatch) => {
-        followUnfollow(dispatch, userId, followAPI.followUser.bind(followAPI), actions.followUser);
+        await followUnfollow(dispatch, userId, followAPI.followUser.bind(followAPI), actions.followUser);
     }
 
 export const unfollow = (userId: number): ThunkType => 
     async (dispatch) => {
-        followUnfollow(dispatch, userId, followAPI.unfollowUser.bind(followAPI), actions.unfollowUser);
+        await followUnfollow(dispatch, userId, followAPI.unfollowUser.bind(followAPI), actions.unfollowUser);
     }
 
 export default usersReducer;

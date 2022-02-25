@@ -1,8 +1,9 @@
+import { ResultCodes } from '../enums/responseCodes';
 import { PhotosType, UserType } from '../types/types';
 
-export type ResponseDataType<D={}> = {
+export type ResponseDataType<D={}, RC=ResultCodes> = {
     data: D
-    resultCode: number
+    resultCode: RC
     messages: Array<string>
 }
 export type AuthMeType = {
